@@ -1,0 +1,120 @@
+# Goal: GCST90319877_cir_Ghouse data
+# Author: KJS
+# Date: September 2, 2024
+
+# Load necessary library
+library(dplyr)
+library(R.utils)
+
+# Set wd
+wdir <- "/pl/active/colelab/users/kjames/enviroMR/"
+setwd(wdir)
+
+# Set trait 
+trait <- "GCST90319877"
+
+#file_path <- "/pl/active/colelab/users/kjames/enviroMR/inputs/GCST90319877_cir_Ghouse/GCST90319877.tsv"
+file_path_unzipped <- "/pl/active/colelab/users/kjames/enviroMR/inputs/GCST90319877_cir_Ghouse/GCST90319877.tsv"
+
+# Unzip file if needed
+if (grepl("\\.gz$", file_path, ignore.case = TRUE)) {
+  # File has a .gz extension, so unzip it
+  gunzip(file_path, remove = FALSE)  # `remove = FALSE` keeps the original file
+  message("File has been gunzipped.")
+} else {
+  message("File is not a gzip file; no action taken.")
+}
+
+#test path for developing code interactively
+df <- read.table(file_path_unzipped, header = TRUE)
+
+head(df)
+colnames(df)
+
+#head(df$direction) # "should all be +"the direction column from METAL output, which includes the studies in the order described in the yaml
+
+# Get colnames for renaming below
+colnames(df)
+
+# Rename columns - following TwoSampleMR format where possible
+# Some columns may need to be added manually
+# new_name = old_name
+df2 = df %>% 
+  rename("SNP" = "rsid",
+         "beta.outcome"="beta",
+         "pval.outcome"="p_value",
+         "chr.outcome"="chromosome",
+         "se.outcome"="standard_error",
+         "pos.outcome"="base_pair_location",
+         "effect_allele.outcome" = "effect_allele",
+         "other_allele.outcome" = "other_allele",
+         "eaf.outcome" = "effect_allele_frequency",
+         "samplesize.outcome" = "samplesize",
+  )
+
+# Add manual columns
+# Columns are needed for twosampleMR harmonization
+df2$outcome <- trait
+df2$mr_keep.outcome = TRUE
+df2$pval_origin.outcome = "reported"
+df2$data_source.outcome = "GWAS_catalog"
+
+# Add allele frequency columns 
+# Column is needed for twosampleMR harmonization
+df2$oaf.outcome = (1 - df2$eaf.outcome) # effect allele frequency for outcome
+
+# NOTE: JBC's effect allele and beta are opposite common formatting! 
+# Switch her data so you don't have to switch every outcome you work with
+#df2$beta.outcome <- df2$beta.outcome * -1
+#df2 <- df2 %>% rename("effect_allele.outcome" = "other_allele.outcome",
+#                      "other_allele.outcome" = "effect_allele.outcome", 
+#                      "oaf.outcome" = "eaf.outcome",
+#                      "eaf.outcome" = "oaf.outcome",
+#                      "allelecount_other.outcome" = "allelecount_effect.outcome",
+#                      "allelecount_effect.outcome" = "allelecount_other.outcome")
+
+# Make a variant column
+# We will match the format of Neale's variant variable - chr:pos:ref:alt (chr:pos:other:effect)
+# where ref=aligned to the forward strand
+# alt=the effect allele
+df2$variant <- paste0(df2$chr.outcome, ":", df2$pos.outcome, ":", df2$other_allele.outcome,":", df2$effect_allele.outcome)
+
+# Get rid of extra columns if necessary
+colnames(df2)
+#df2 <- df2 %>% select(#-odds_ratio, -ci_lower, -ci_upper)
+
+# View
+head(df2)
+colnames(df2)
+
+# Reorganize columns
+df3 <- df2 %>% select(SNP,
+                      variant,
+                      chr.outcome,
+                      pos.outcome,
+                      effect_allele.outcome,
+                      other_allele.outcome,
+                      eaf.outcome,
+                      oaf.outcome,
+                      samplesize.outcome,
+                      beta.outcome,
+                      se.outcome,
+                      pval.outcome,
+                      #id.outcome,
+                      mr_keep.outcome,
+                      outcome,
+                      pval_origin.outcome,
+                      data_source.outcome,
+                      #odds_ratio.outcome,
+                      #cases.outcome,
+                      #effective_cases.outcome
+                      #chromosome_grch38,
+                      #start_grch38,
+                      #rs_id 
+                      #h2g.observed,
+                      #h2g.P.value
+)
+
+# Save
+write.csv(df3, "interim_data/outcome/formatted_GCST90319877_cir_Ghouse.csv")
+saveRDS(df3, "interim_data/outcome/formatted_GCST90319877_cir_Ghouse.rds")

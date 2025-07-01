@@ -1,0 +1,720 @@
+# MR Analysis: PheWAS-Cluster
+# Author: KJS
+# Date: 9/26/24 
+
+# Exposure: whiteXwholegrain (from clustering)
+# Outcome: GCST90132314_CVD_Aragam
+
+# Overview of steps:
+# 0. Get PheWAS data from all exposure SNPs (pre-requisite)
+# 1. Load PheWAS data
+# 2. Filter PheWAS traits to those with an effective sample size of 50K
+# 3. Filter PheWAS data to traits that have a genetic correlation of less than 75% with the exposure
+# 4. Load exposure data 
+# 5. Wrangle exposure data to get a variant x statistic matrix for n, se, pval, b, t-stat
+# 6. Wrangle PheWAS data to get a variant x statistic matrix for n, se, pval, b, t-stat 
+# 7. Prep for PheWAS filtering
+# 8. Apply PheWAS filtering
+# 9. Perform MR
+
+# Set wd
+wdir <- "/pl/active/colelab/users/kjames/enviroMR/"
+setwd(wdir)
+
+# Load libraries
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(ggrepel)
+
+# Set traits for naming files 
+exposure <- "whiteXwholegrain"
+outcome <- "GCST90132314_CVD_Aragam"
+OUT_pheno <- outcome # used for some naming
+# EXP_pheno defined below
+# For plots
+EXP_name <- "White vs Whole Grain Bread"
+OUT_name <- "Cardiovascular Disease"
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 1. Load PheWAS data
+#~~~~~~~~~~~~~~~~~~~~~
+pwas <- read.csv("results/julie_collab/PheWASCluster/SNP_PVE_Alcochol_WhiteXWhole_OilyFish.csv")
+pwas <- pwas %>% select(-c(X, V1))
+
+# Make file name prettier. Get rid of extra junk.
+pwas$trait <- sub("\\..*$", "", pwas$file_name)
+
+# PWAS includes some duplicated traits that are in both raw and 
+# inverse rank normalized transformed states. 
+# In these cases, we want to keep the IRNT versions. 
+# Remove the traits from pwas that end in _raw
+pwas <- pwas[!grepl("_raw$", pwas$trait),]
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 2. Filter PheWAS traits to those with an effective sample size of 50K
+# For binary traits:
+# Neff = (4 x Ncases x Ncontrols)/(Ncases + Ncontrols)
+# For quantitative traits: 
+# Neff = samplesize [... so this step is geared towards binary traits]
+#~~~~~~~~~~~~~~~~~~~~~
+md <- read.table(gzfile("../../../common/published_gwas/Neale_UKB_GWAS_round2/Both_sexes/metadata/phenotypes.both_sexes.v2.tsv.bgz"),header=TRUE, sep="\t", fill=TRUE, quote = "")
+# quote="" important to get a full file
+
+# Filter to case/control traits
+#mdcc <- md %>% filter(!is.na(n_cases))
+#mdcc <- md %>% filter(variable_type == "binary")
+
+# Also, grab traits that are not binary (we will use later)
+#md_other <- md %>% filter(variable_type != "binary")
+
+# Convert n_controls and n_cases to numeric
+#mdcc$n_cases <- as.numeric(mdcc$n_cases)
+#mdcc$n_controls <- as.numeric(mdcc$n_controls)
+
+# Calculate Neff
+#mdcc$Neff <- (4*mdcc$n_cases*mdcc$n_controls)/(mdcc$n_cases+mdcc$n_controls)
+
+# Plot
+#mdcc$phenotype <- factor(mdcc$phenotype, levels = mdcc$phenotype[order(mdcc$Neff)])
+#ggplot(mdcc, aes(x = phenotype, y = Neff)) +
+#  geom_bar(stat = "identity") +
+#  labs(title = "Bar Plot Ordered by Effective Sample Size")
+
+# Review summary
+#summary(mdcc$Neff)
+
+# Threshold
+#neff_thresh <- 50000
+
+# Remove traits with neff<thresh (if we code to keep neff>thresh, we
+# risk accidentally removing traits not in the md file)
+#mdcc_50k_remove <- mdcc %>% filter(Neff <= neff_thresh)
+
+# Remove directly from pwas
+#pwas2 <- pwas %>% filter(!(trait %in% mdcc_50k_remove$phenotype))
+
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 2.1. Filter based on general sample size and ordinal variable sample size
+#~~~~~~~~~~~~~~~~~~~~~
+# from, https://github.com/LizaDarrous/PheWAS-cluster/blob/main/R/getSNPs_PheWAS.R
+n_thresh <- 50000
+md$n_eff = md$n_non_missing
+ncont_ind = which(!is.na(md$n_cases)) #which rows have values in n_cases 
+md$n_eff[ncont_ind] = (4*md$n_cases[ncont_ind]*md$n_controls[ncont_ind]) / (md$n_cases[ncont_ind]+md$n_controls[ncont_ind]) # (4*(control*case))/totN
+small_n = which(md$n_eff < n_thresh)
+md = md[-small_n,]
+
+# Only keep traits in PheWAS that have sample size >50K
+pwas2 <- pwas %>% filter((trait %in% md$phenotype))
+
+# Remove traits with  (bread traits - look at md)
+breadtraits = c("1448_3", "1448_1", "1448_2", "1448_4", "100940", "1438_irnt")
+pwas2 <- pwas2 %>%
+  filter(!(trait %in% breadtraits))
+
+#pwas3 <- pwas2 %>% filter(n_complete_samples >= neff_thresh) # use the same 50K threshold
+
+# If the phewas data has a value in expected_min_category_minor_AC variable, filter to 50K or higher
+#pwas4 <- pwas3[pwas3$expected_min_category_minor_AC >= 50000 | is.na(pwas3$expected_min_category_minor_AC) == TRUE,]
+
+# Visual check
+#plot(pwas4$n_complete_samples)
+#plot(pwas4$n_complete_samples, pwas4$expected_min_category_minor_AC)
+
+# Move forward with pwas4 (but rename it pwas2 to keep this change easy throughout)
+#pwas2 <- pwas4
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 2.2. Merge pwas data with other meta data
+#~~~~~~~~~~~~~~~~~~~~~
+# Get the manifest key for PheWAS
+key <- read.csv("/pl/active/colelab/common/published_gwas/Neale_UKB_GWAS_round2/metadata/UKBB GWAS Imputed v3 - File Manifest Release 20180731 - Description Lookup.csv",header = FALSE)
+
+# Merge to make a description column. Also, name the data frame traits to match LD's workflow.
+trait_info <- merge(pwas2, key, by.x = "trait", by.y = "V1", all.x = TRUE, all.y = FALSE)
+# new_name = old_name
+trait_info = trait_info %>% dplyr::rename("description" = "V2")
+
+# USER INPUT (used in section XXX)
+#Find the ID of the initial exposures of interest
+key_term <- "Bread consumed" #"Oily fish intake", note- alcohol consumed isn't the direct metric but should be a good proxy
+trait_ID <- key[grep(key_term, key$V2),] 
+trait_ID <- trait_ID[1,1]
+#~~~~~~~~~~~~~~~~~~~~~
+# 3. Filter PheWAS data to traits that have a genetic correlation of less than 75% with the exposure
+#~~~~~~~~~~~~~~~~~~~~~
+# Genetic correlation data
+gcor <- read.csv("/pl/active/colelab/users/kjames/enviroMR/inputs/UKBB_genetic_correlation_data-2024-03-20.csv")
+
+# Make phenotype names easier to read using the column with the url
+gcor$phenotype.1.name <- stringr::str_extract(gcor$Phenotype.1, "(?<=\\>).*(?=\\<)")
+gcor$phenotype.2.name <- stringr::str_extract(gcor$Phenotype.2, "(?<=\\>).*(?=\\<)")
+
+# USER INPUT: Define genetic correlation threshold
+gcorr_thresh <- 0.75
+# USER INPUT: Define trait of interest
+cat(key_term) # check 
+toi_gcorr <- gcor[grep(key_term, gcor$phenotype.1.name),]
+# Filter
+high_gcorr = which(abs(toi_gcorr$rg)>=gcorr_thresh) #note, gcorr are + and -
+
+# Function that checks the genetic correlations
+check_gcorr <- function(high_gcorr) {
+  if (length(high_gcorr) > 0) {
+    cat(paste0("Remove these phenotypes:\n", high_gcorr))
+  } else {
+    cat(paste0("There are no phenotypes with a genetic correlation greater than:\n", gcorr_thresh ))
+  }
+}
+
+# Apply function
+check_gcorr(high_gcorr)
+
+# If needed, filter out the traits from objects
+# Remove from gcor
+#toi_gcorr2 <- toi_gcorr[-high_gcorr,]
+
+# Set up: 
+toi_gcorr_rm <- toi_gcorr[high_gcorr,]
+trait_rm <- toi_gcorr_rm$ID2
+
+# Get rows of pwas2 that should be removed due to gcorr
+rows <- pwas2$trait == trait_rm
+# Remove from pwas2; does nothing if there are none
+if (length(rows) == 0) {
+  # Do nothing
+} else {
+  # Remove rows with indices
+  pwas2=pwas2[!rows,]
+}
+
+# Get rows of trait_info that should be removed due to gcorr
+rows <- trait_info$trait == trait_rm
+# Remove from trait info; does nothing if there are none
+if (length(rows) == 0) {
+  # Do nothing
+} else {
+  # Remove rows with indices
+  trait_info=trait_info[!rows,]
+}
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 4. Load exposure data
+#~~~~~~~~~~~~~~~~~~~~~
+# Load merged, harmonized GI data
+df <- readRDS(paste0("interim_data/merged_GI/standardized_shared/std_mrdat_", exposure, "_", outcome ,"_GRCh37.rds")) #_GRCh37
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 5. Wrangle exposure data to get a variant x statistic matrix for n, se, pval, b, t-stat
+#~~~~~~~~~~~~~~~~~~~~~
+# Set row names
+rownames(df) <- df$variant.exposure
+# n
+exp_n <- df[,"samplesize.exposure", drop=FALSE]
+# se
+exp_se <- df[,"se.exposure", drop=FALSE]
+# pval
+exp_pval <- df[,"pval.exposure", drop=FALSE]
+# beta
+exp_b <- df[,"beta.exposure", drop=FALSE]
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 6. Wrangle PheWAS data to get a variant x statistic matrix for n, se, pval, b, t-stat 
+#~~~~~~~~~~~~~~~~~~~~~
+# Filter pwas with chr_pos info (without allele info)
+pwas2$chr_pos <- regmatches(pwas2$variant, regexpr("[a-z0-9]+\\:[a-z0-9]+", pwas2$variant, ignore.case = TRUE)) 
+exp_n$chr_pos <- regmatches(rownames(exp_n), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(exp_n), ignore.case = TRUE)) 
+pwas2_sub <- pwas2[pwas2$chr_pos %in% exp_n$chr_pos,]
+
+# Remove chr_pos variable from exp_n
+exp_n <- exp_n %>% select(-chr_pos)
+
+# From PheWAS, get variants that correspond to the exposure variants
+#pwas2_sub <- pwas2[pwas2$variant %in% rownames(exp_n),]
+
+# Identify duplicates, if any. If present, add code to remove.
+dups = pwas2_sub %>%
+  dplyr::group_by(variant, file_name) %>%
+  dplyr::summarise(n = dplyr::n(), .groups = "drop") %>%
+  dplyr::filter(n > 1L)
+nrow(dups)# none identified
+
+# Get variant x n matrix
+pwas_sub_n <- tidyr::pivot_wider(pwas2_sub, id_cols = c(variant), names_from = file_name, values_from = n_complete_samples)
+
+# Get variant x se matrix
+pwas_sub_se <- tidyr::pivot_wider(pwas2_sub, id_cols = c(variant), names_from = file_name, values_from = se)
+
+# Get variant x pval matrix
+pwas_sub_pval <- tidyr::pivot_wider(pwas2_sub, id_cols = c(variant), names_from = file_name, values_from = pval)
+
+# Get variant x b matrix
+pwas_sub_beta <- tidyr::pivot_wider(pwas2_sub, id_cols = c(variant), names_from = file_name, values_from = beta)
+
+# Get variant x t-statistic matrix
+pwas_sub_tstat <- tidyr::pivot_wider(pwas2_sub, id_cols = c(variant), names_from = file_name, values_from = tstat)
+
+# Check that row names and column names are the same for each of the data frames
+identical(colnames(pwas_sub_n), colnames(pwas_sub_se))
+identical(rownames(pwas_sub_n), rownames(pwas_sub_se))
+# TRUE
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 7. Prep for PheWAS filtering
+#~~~~~~~~~~~~~~~~~~~~~
+# Name files to match LD objects
+unstdBeta_df <- pwas_sub_beta
+unstdSE_df <- pwas_sub_se
+tstat_df <- pwas_sub_tstat
+pval_df <- pwas_sub_pval
+
+# filter out traits that are NA (albumin and other measurements)
+na_traits = which(is.na(trait_info$description)==T)
+# not all are also NA in beta file
+na_effect = which(is.na(unstdBeta_df)==T, arr.ind=T)
+na_both = intersect(na_traits,unique(as.numeric(na_effect[,2])));
+if(length(na_both)>0){
+  unstdBeta_df = unstdBeta_df[,-na_both]
+  unstdSE_df = unstdSE_df[,-na_both]
+  tstat_df = tstat_df[,-na_both]
+  pval_df = pval_df[,-na_both]
+  trait_info = trait_info[-na_both,]
+}
+
+# Make row names objects (if you set them now they will get erased)
+rnames_unstdBeta_df <- unstdBeta_df$variant
+rnames_unstdSE_df <- unstdSE_df$variant
+rnames_tstat_df <- tstat_df$variant
+rnames_pval_df <- pval_df$variant
+
+# Get rid of variant column in first position. Will set row names after math.
+unstdBeta_df <- unstdBeta_df %>% select(-variant)
+unstdSE_df <- unstdSE_df %>% select(-variant)
+tstat_df <- tstat_df %>% select(-variant)
+pval_df <- pval_df %>% select(-variant)
+
+# Get traits to dimensions of file names - the number we are evaluating without filtering
+trait_info2 <- trait_info %>% select(trait, n_complete_samples, file_name, description)
+trait_info3 <- trait_info2[!duplicated(trait_info2$file_name),] # use file_name not trait here
+
+# Reorder the traits in trait_info to match the order of the traits in tstat_df
+trait_info4 <- trait_info3 %>% arrange(match(file_name, colnames(tstat_df)))
+identical(colnames(tstat_df), trait_info4$file_name) # true, good check
+dim(trait_info4) #180x4; 150, 3632
+
+# All file names are unique but some correspond to the same trait
+# For duplicated traits, keep those with larger N
+trait_info_maxN = trait_info4 %>%
+  group_by(trait) %>%
+  filter(n_complete_samples == max(n_complete_samples)) %>%
+  ungroup()
+
+# If there are differences, say it. Then rename the trait_info variable
+#if(nrow(trait_info4) == nrow(trait_info_maxN)){
+#  print("No duplicated traits, proceed!")
+#} else if (nrow(trait_info4) != nrow(trait_info_maxN)){
+#  print("Duplicated traits. Renaming trait_info_maxN as trait_info4 and proceeding.")
+#  trait_info4 = trait_info_maxN
+#}
+
+# Get list of positions that were removed because they were duplicated and have a smaller N
+# Get the indices of the rows that are being removed
+indices_removed <- setdiff(1:nrow(trait_info4), match(trait_info_maxN$trait, trait_info4$trait)) #123
+
+# Apply filtering to other matrices
+# If the value in indices_removed is not null and it contains values then filter
+if (!is.null(indices_removed) && length(indices_removed) > 0) {
+  unstdBeta_df = unstdBeta_df[ , -indices_removed]
+}
+
+if (!is.null(indices_removed) && length(indices_removed) > 0) {
+  unstdSE_df = unstdSE_df[ , -indices_removed]
+}
+
+if (!is.null(indices_removed) && length(indices_removed) > 0) {
+  tstat_df = tstat_df[ , -indices_removed]
+}
+
+if (!is.null(indices_removed) && length(indices_removed) > 0) {
+  pval_df = pval_df[ , -indices_removed]
+}
+
+if (!is.null(indices_removed) && length(indices_removed) > 0) {
+  trait_info4 = trait_info4[-indices_removed,] #orientation is different than above dfs
+}
+
+print(paste0("Dimension of unstd SNP-trait matrix: ", dim(unstdBeta_df)[1],", ",dim(unstdBeta_df)[2]))
+print(paste0("Number of traits: ", dim(trait_info4)[1]))
+
+#Find the ID of the initial exposures of interest
+EXP_pheno <-  trait_ID
+
+# Find indices of NA values
+na_indices <- which(is.na(tstat_df), arr.ind = TRUE)
+na_indices_uniq <- unique(na_indices[,2]) # trait in the 2360 column is problematic for a handful of snps - old comment
+# Remove NA
+# If the value is null/NA and there are indices, then filter
+if (is.null(na_indices_uniq) && length(na_indices_uniq) > 0) {
+  unstdBeta_df = unstdBeta_df[ , -na_indices_uniq]
+}
+
+if (is.null(na_indices_uniq) && length(na_indices_uniq) > 0) {
+  unstdSE_df = unstdSE_df[ , -na_indices_uniq]
+}
+
+if (is.null(na_indices_uniq) && length(na_indices_uniq) > 0) {
+  tstat_df = tstat_df[ , -na_indices_uniq]
+}
+
+if (is.null(na_indices_uniq) && length(na_indices_uniq) > 0) {
+  pval_df = pval_df[ , -na_indices_uniq]
+}
+
+if (is.null(na_indices_uniq) && length(na_indices_uniq) > 0) {
+  trait_info4 = trait_info4[-na_indices_uniq,]
+}
+
+print(paste0("Dimension of unstd SNP-trait matrix: ", dim(unstdBeta_df)[1],", ",dim(unstdBeta_df)[2]))
+print(paste0("Number of traits: ", dim(trait_info4)[1]))
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 8. Apply PheWAS filtering
+#~~~~~~~~~~~~~~~~~~~~~
+# Check
+#identical(colnames(tstat_df), trait_info_maxN$file_name) # TRUE
+identical(colnames(tstat_df), trait_info4$file_name) # TRUE
+# STOP if not TRUE
+
+# Getting the standardized effects (tstat/sqrt(N)) 
+# Performs matrix multiplication
+stdBeta_df = as.matrix(tstat_df) %*% diag(1/(sqrt(trait_info4$n_complete_samples)))   #mat %*% diag(1 / dev)
+
+# Manual check to test if you understand matrix multiplication step
+tstat_df[1,1]/sqrt(trait_info4$n_complete_samples[1]) # gives the same value as stdBeta_df, good check
+# Manual check to test if you understand matrix multiplication step
+tstat_df[1,1] * 1/sqrt(trait_info4[1,2])
+stdBeta_df[1,1]
+# These are the same value. 
+# So, yes, the standardization for beta is tstat/sqrt(N). 
+
+# Make a data frame and reassign names
+stdBeta_df <- as.data.frame(stdBeta_df)
+colnames(stdBeta_df) = colnames(unstdBeta_df)
+rownames(stdBeta_df) = rnames_tstat_df
+
+# Name and standardize non-exposure containing objects
+stdBeta_df_noEXP = stdBeta_df # if the exposure is not in the PheWAS then these objects are the same
+stdSE_noEXP = 1/(sqrt(trait_info4$n_complete_samples)) #1/sqrt(N)
+
+# The SNPs in your exposure data and the PheWAS data are supposed to be the same
+# But sometimes there are minor differences. This causes a problem in the next step
+# Filter to make the pwas SNPs and the exposure SNPs overlap completely
+exp_n$chr_pos <- regmatches(rownames(exp_n), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(exp_n), ignore.case = TRUE)) 
+exp_b$chr_pos <- regmatches(rownames(exp_b), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(exp_b), ignore.case = TRUE)) 
+exp_pval$chr_pos <- regmatches(rownames(exp_pval), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(exp_pval), ignore.case = TRUE)) 
+exp_se$chr_pos <- regmatches(rownames(exp_se), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(exp_se), ignore.case = TRUE)) 
+
+stdBeta_df_noEXP$chr_pos <- regmatches(rownames(stdBeta_df_noEXP), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(stdBeta_df_noEXP), ignore.case = TRUE)) 
+
+exp_n <- exp_n %>% filter(chr_pos %in% stdBeta_df_noEXP$chr_pos)
+exp_b <- exp_b %>% filter(chr_pos %in% stdBeta_df_noEXP$chr_pos)
+exp_pval <- exp_pval %>% filter(chr_pos %in% stdBeta_df_noEXP$chr_pos)
+exp_se <- exp_se %>% filter(chr_pos %in% stdBeta_df_noEXP$chr_pos)
+
+# Remove the 'chr_pos' column and set row names back
+exp_n <- exp_n %>% select(-chr_pos)
+exp_b <- exp_b %>% select(-chr_pos)
+exp_pval <- exp_pval %>% select(-chr_pos)
+exp_se <- exp_se %>% select(-chr_pos)
+
+# Standardize exposure beta and se - corresponds to your data/exposure
+# Beta
+exp_stdB <- (exp_b/exp_se)/sqrt(exp_n)
+# SE
+exp_stdSE <- exp_se/sqrt(exp_n) 
+# Rename standardized exposure objects
+# Rows = n variants in instrument 
+stdBeta_EXP <- exp_stdB
+stdSE_EXP <- exp_stdSE
+
+
+# Order the rows the same between your exposure SNPs and pwas SNPs
+# Beta
+# Convert rownames to a column for both data frames
+stdBeta_EXP$chr_pos <- regmatches(rownames(stdBeta_EXP), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(stdBeta_EXP), ignore.case = TRUE)) 
+stdBeta_df_noEXP$chr_pos <- regmatches(rownames(stdBeta_df_noEXP), regexpr("[a-z0-9]+\\:[a-z0-9]+", rownames(stdBeta_df_noEXP), ignore.case = TRUE)) 
+# arrange
+stdBeta_EXP_ordered = stdBeta_EXP %>% arrange(match(chr_pos, stdBeta_df_noEXP$chr_pos))
+
+# Check that it worked
+identical(stdBeta_EXP_ordered$chr_pos, stdBeta_df_noEXP$chr_pos) # TRUE - stop if not true!
+
+# Remove the 'rowname' column and set row names back
+stdBeta_EXP <- stdBeta_EXP %>% select(-chr_pos)
+stdBeta_df_noEXP <- stdBeta_df_noEXP %>% select(-chr_pos)
+
+
+# SE
+# use rownames of stdBeta (exposure) to check variants as sdSE_noEXP corresponds to each PheWAS trait
+#stdSE_EXP <- stdSE_EXP[which(rownames(stdSE_EXP) %in% rownames(stdBeta_df_noEXP)),, drop = FALSE]
+identical(rownames(stdSE_EXP), rownames(stdBeta_EXP)) # TRUE - stop if not true!
+# PWAS data
+stdSE_EXP <- 1/(sqrt(exp_n$samplesize.exposure [1])) #1/sqrt(N)
+
+# Get rid of exposure from df
+#trait_info_noEXP = trait_info4[-which(grepl(paste0("^",EXP_pheno), trait_info4$file_name)) ,] #its not in there
+print(paste0("Dimension of std SNP-trait matrix: ", dim(stdBeta_df)[1],", ",dim(stdBeta_df)[2]))
+print(paste0("Number of traits: ", dim(trait_info4)[1]))
+
+# filtering for SNPs more associated with other traits using t-stat
+tstat_dif = matrix(NA, nrow = nrow(stdBeta_df_noEXP), ncol = ncol(stdBeta_df_noEXP)) #makes empty matrix with specified dimensions
+for(i in 1:nrow(stdBeta_df_noEXP)){ #1:i SNPs
+  for(j in 1:ncol(stdBeta_df_noEXP)){ #1:j traits
+    tstat_dif[i,j] = (abs(stdBeta_EXP[i,]) - abs(stdBeta_df_noEXP[i,j])) / #trait of interest, snp i - trait j, snp i 
+      sqrt(stdSE_EXP^2 + stdSE_noEXP[j]^2)
+  }
+}
+# beta of exposure corresponding to SNP i - <minus> beta of trait j corresponding to SNP i 
+# / <divided by> 
+# square root of (the standard error of the exposure squared + <plus> the standard error of trait j squared)
+# result is a matrix with the tstat_difference
+
+# Set up t-test
+tstat_pval_df = pnorm(tstat_dif)  # larger than on EXP
+tstat_thresh = 0.05/dim(trait_info4)[1] # accuracy: divided by nSNPs* nIndp.traits - multiple test correction step
+
+# Format
+tstat_dif = as.data.frame(tstat_dif) # turn matrix into df
+colnames(tstat_dif) = colnames(stdBeta_df_noEXP)
+rownames(tstat_dif) = rownames(stdBeta_df_noEXP)
+
+# Apply test/filter
+sig_ind = which(tstat_pval_df<tstat_thresh, arr.ind = T) #return array indices (df with columns named: row, column)
+
+# Identify SNPS and traits that are more related to other traits
+sus_SNPs=rownames(tstat_dif)[unique(sig_ind[,1])] #get the row names of SNPs from tstat_dif that are less than the threshold (indicating more related to snp than exposure)
+sus_traits = unique(trait_info4$description[(sig_ind[,2])]) #+1 - LD had +1 but idk why
+print(paste0("SNP filtering revealed ", length(sus_SNPs)," SNPs more strongly associated to traits other than exposure trait ", EXP_pheno,"."))
+
+# Which traits?
+print(paste0("The traits more with SNPs more strongly associated with traits other than the exposure include:", sus_traits))
+print(paste0("The SNPs more strongly associated with traits other than the exposure include:", sus_SNPs))  
+
+
+# Save output objects
+interim_obj_path <- "/pl/active/colelab/users/kjames/enviroMR/interim_data/PheWASCluster"
+save(list=c("exp_b", "exp_n", "exp_pval", "exp_se", "exp_stdB", "exp_stdSE", "stdBeta_df", "stdBeta_df_noEXP", "stdBeta_EXP", "trait_info4", "tstat_df", "tstat_dif", "tstat_pval_df",
+            "df", "sus_SNPs", "sus_traits","sig_ind", "trait_info4"),
+     file = paste0(interim_obj_path,"/PheWASCluster_objects_",exposure,"_", outcome,".Rdata"))
+
+# Load if needed
+load(file = paste0(interim_obj_path,"/PheWASCluster_objects_",exposure,"_", outcome,".Rdata"))
+#~~~~~~~~~~~~~~~~~~~~~
+# 9. Perform MR
+#~~~~~~~~~~~~~~~~~~~~~
+# Get variant column
+head(df)
+
+# Try filtering with just chr:pos
+df$chr_pos <- regmatches(df$variant.exposure, regexpr("[a-z0-9]+\\:[a-z0-9]+", df$variant.exposure, ignore.case = TRUE)) 
+sus_SNPs_chr_pos <- regmatches(sus_SNPs, regexpr("[a-z0-9]+\\:[a-z0-9]+", sus_SNPs, ignore.case = TRUE)) #14
+
+# Filter using this variable
+df_filt <- df[!df$chr_pos %in% sus_SNPs_chr_pos,]
+dim(df_filt)
+
+# Raw, unfiltered
+# This step can be used to compare with the unstandardized results
+MRobj_raw <- MendelianRandomization::mr_input(bx = df_filt$beta.exposure,
+                                              bxse = df_filt$se.exposure,
+                                              by = df_filt$beta.outcome,
+                                              byse = df_filt$se.outcome)
+
+MRres_raw <- MendelianRandomization::mr_allmethods(MRobj_raw)
+MRres_raw
+
+# Get df
+MRres_df <- MRres_raw@Values
+
+# Save tables
+# Path
+phewas_table_dir <- "/pl/active/colelab/users/kjames/enviroMR/results/julie_collab/PheWASCluster/tables"
+# All MR results
+write.csv(MRres_df, paste0(phewas_table_dir, "/MR_PheWASCluster_Filtered_Results_", exposure,"_", outcome, ".csv"))
+
+# Run IVW 
+mr_ivw <- MendelianRandomization::mr_ivw(MRobj_raw)
+# Create a table of results for saving
+mr_ivw_df <- data.frame(test = "mr_ivw",
+                        model = mr_ivw@Model,
+                        robust = mr_ivw@Robust,
+                        penalized = mr_ivw@Penalized,
+                        estimate = mr_ivw@Estimate,
+                        std_error = mr_ivw@StdError,
+                        cilower = mr_ivw@CILower,
+                        ciupper = mr_ivw@CIUpper,
+                        pvalue = mr_ivw@Pvalue,
+                        heter_Q = mr_ivw@Heter.Stat[1],
+                        heter_pvalue = mr_ivw@Heter.Stat[2],
+                        fstat = mr_ivw@Fstat)
+
+# Save table
+write.csv(mr_ivw_df, paste0(phewas_table_dir, "/MR_PheWASCluster_Filtered_IVWres_", exposure,"_", outcome, ".csv"))
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 10. Plot
+#~~~~~~~~~~~~~~~~~~~~~
+# Plot with all methods
+MRres_p <- MendelianRandomization::mr_plot(MRres_raw, error=TRUE, orientate=FALSE, line="ivw", labels=TRUE) +
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    #legend.position="none", 
+    axis.title.y=ggplot2::element_text(size=14),
+    axis.text.y=ggplot2::element_text(size=14), 
+    axis.ticks.y=ggplot2::element_line(linewidth=0),
+    axis.title.x=ggplot2::element_text(size=14),
+    axis.text.x=ggplot2::element_text(size=14),
+    axis.ticks.x=ggplot2::element_line(linewidth=0),
+    panel.border = element_rect(color = "black", 
+                                fill = NA, 
+                                linewidth = 3)) +
+  labs(x = paste0("Genetic Effect on ", EXP_name),
+       y = paste0( "Genetic Effect on ", OUT_name)) +
+  ggtitle(paste0("PheWAS-Cluster Filtered Significant Variants (n=", nrow(df_filt), ")")) 
+#scale_color_viridis(discrete = TRUE)
+
+MRres_p
+
+# USER INPUT: Check paths and variable names
+plots_dir <- "/pl/active/colelab/users/kjames/enviroMR/results/julie_collab/PheWASCluster/plots"
+
+# Save
+ggsave(paste0(plots_dir,"/PheWAS_Cluster_MR_",exposure, "_", outcome,"_scatterplot_allmethods.png"),
+       plot = MRres_p,
+       device = NULL,
+       path = NULL,
+       scale = 1,
+       width = 6,
+       height = 4,
+       units = c("in"),
+       dpi = 300,
+       limitsize = TRUE)
+
+# Get values and subset to weighted median and IVW for custom plot below
+mrRes_df_subsetMethods <- MRres_df %>% filter(Method %in% c("Weighted median", "IVW"))
+
+# Custom plot for external facing meetings
+custom_MRscatter <- ggplot(df_filt, aes(x = beta.exposure, y = beta.outcome)) +
+  geom_point() +
+  ggplot2::geom_errorbar(ggplot2::aes(ymin=beta.outcome-se.outcome, ymax=beta.outcome+se.outcome), colour="grey", width=0) +
+  ggplot2::geom_errorbarh(ggplot2::aes(xmin=beta.exposure-se.exposure, xmax=beta.exposure+se.exposure), colour="grey", height=0) +
+  ggplot2::geom_abline(data = mrRes_df_subsetMethods, # Specify correct data here
+                       ggplot2::aes(intercept=0, slope=Estimate, colour=Method), size = 1.75, show.legend=TRUE) + #0 if not MR-Egger
+  ggplot2::theme_bw() +
+  ggplot2::theme(
+    #legend.position="none", 
+    axis.title.y=ggplot2::element_text(size=14),
+    axis.text.y=ggplot2::element_text(size=14), 
+    axis.ticks.y=ggplot2::element_line(size=0),
+    axis.title.x=ggplot2::element_text(size=14),
+    axis.text.x=ggplot2::element_text(size=14),
+    axis.ticks.x=ggplot2::element_line(size=0),
+    panel.border = element_rect(color = "black", 
+                                fill = NA, 
+                                size = 3)) +
+  labs(x = paste0("Genetic Effect on ", EXP_name),
+       y = paste0( "Genetic Effect on ", OUT_name)) +
+  ggtitle(paste0("PheWAS-Cluster Filtered Genetic Instrument (n=", nrow(df_filt), ")")) +
+  scale_color_manual(values = c("#3E4A89FF", "#6DCD59FF"))
+
+custom_MRscatter
+
+ggsave(paste0(plots_dir,"/PheWAS_Cluster_MR_",exposure, "_", outcome,"_scatterplot_IVE_weightedmedn.png"),
+       plot = custom_MRscatter,
+       device = NULL,
+       path = NULL,
+       scale = 1,
+       width = 6,
+       height = 4,
+       units = c("in"),
+       dpi = 300,
+       limitsize = TRUE)
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 11. Load MR object, add PheWAS Cluster screen to slot
+#~~~~~~~~~~~~~~~~~~~~~
+# SKIP FOR NOW - NEED TO REDO SEPERATELY
+# Get master object
+#mrobj <- readRDS("interim_data/merged_GI/standardized_shared/std_mrobject_steiger_240918.rds")
+#mrobj <- readRDS("interim_data/merged_GI/standardized_shared/std_mrobject_steiger_PheWASClust_240924.rds") # has oilyfish-TG
+#mrobj <- readRDS("interim_data/merged_GI/standardized_shared/std_mrobject_steiger_PheWASClust_240925.rds") # has oilyfish-TG, oilyfish-CVD
+#mrobj <- readRDS("interim_data/merged_GI/standardized_shared/std_mrobject_steiger_PheWASClust_240925b.rds") # has oilyfish-TG, oilyfish-CVD, alcohol-cirrhosis
+#mrobj <- readRDS("interim_data/merged_GI/standardized_shared/std_mrobject_steiger_PheWASClust_240925c.rds") # has oilyfish-TG, oilyfish-CVD, alcohol-cirrhosis, alcohol-ALT, 
+mrobj <- readRDS("interim_data/merged_GI/standardized_shared/std_mrobject_steiger_PheWASClust_240925d.rds") # has oilyfish-TG, oilyfish-CVD, alcohol-cirrhosis, alcohol-ALT, bread-LDL
+
+# USER INPUT - select correct slot
+# Get oily fish TG data
+#mrobj_slot <- mrobj$oilyfish_TG
+#mrobj_slot <- mrobj$oilyfish_CVD
+#mrobj_slot <- mrobj$alcohol_cir
+#mrobj_slot <- mrobj$alcohol_ALT
+mrobj_slot <- mrobj$whiteXwholegrain_CVD
+
+# Make column with sus_snps
+mrobj_slot$chr_pos <- regmatches(mrobj_slot$variant.exposure, regexpr("[a-z0-9]+\\:[a-z0-9]+", mrobj_slot$variant.exposure, ignore.case = TRUE))
+sus_SNPs_chr_pos <- regmatches(sus_SNPs, regexpr("[a-z0-9]+\\:[a-z0-9]+", sus_SNPs, ignore.case = TRUE))
+mrobj_slot$PheWAS_clust_keep <- ifelse(mrobj_slot$chr_pos %in% sus_SNPs_chr_pos, FALSE, TRUE) # keep the "TRUE"
+table(mrobj_slot$PheWAS_clust_keep)
+
+# USER INPUT - select correct slot
+# USER INPUT - select correct slot
+#mrobj$oilyfish_TG <- mrobj_slot
+#mrobj$oilyfish_CVD <- mrobj_slot
+#mrobj$alcohol_cir <- mrobj_slot
+#mrobj$alcohol_ALT <- mrobj_slot
+#mrobj$whiteXwholegrain_LDL <- mrobj_slot
+mrobj$whiteXwholegrain_CVD <- mrobj_slot
+
+# Save
+saveRDS(mrobj, "interim_data/merged_GI/standardized_shared/std_mrobject_steiger_PheWASClust_240925e.rds")
+
+#~~~~~~~~~~~~~~~~~~~~~
+# 12. Investigate SNPs removed
+#~~~~~~~~~~~~~~~~~~~~~
+# Get the row names of SNPs from tstat_dif that are less than the threshold (indicating more related to snp than exposure)
+rmd_SNPnames=rownames(tstat_dif)[sig_ind[,1]] 
+sig_ind_readable= cbind(rmd_SNPnames, sig_ind)
+# Get the colnames names of traits from tstat_dif that correspond to the SNPs with a stronger relationship than the threshold
+rmd_traitnames=colnames(tstat_dif)[sig_ind[,2]]
+sig_ind_readable=cbind(sig_ind_readable, rmd_traitnames)
+
+#Get description
+traits_unique <- trait_info %>% select(file_name, description)
+traits_unique <- unique(traits_unique)
+sig_ind_readable = merge(sig_ind_readable, traits_unique, by.x = "rmd_traitnames", by.y = "file_name", all.x = TRUE, all.y = FALSE)
+
+# Format
+sig_ind_readable <- sig_ind_readable %>% 
+  select(rmd_SNPnames, description) %>% 
+  dplyr::rename("variant" = "rmd_SNPnames")
+
+# Add column to remind you the exposure and outcome
+sig_ind_readable$exposure <- exposure
+sig_ind_readable$outcome <- outcome
+
+# NOTE, error here but it is okay because there were no sus_snps identified with this filtering so we don't need to save an empty file
+
+# Save tables
+# Path
+phewas_table_dir <- "/pl/active/colelab/users/kjames/enviroMR/results/julie_collab/PheWASCluster/tables"
+# MR results
+write.csv(sig_ind_readable, paste0(phewas_table_dir, "/MR_PheWASCluster_SusSNPs_RelatedTraits_", exposure,"_", outcome, ".csv"))
+
+
+
+
+
+
+
