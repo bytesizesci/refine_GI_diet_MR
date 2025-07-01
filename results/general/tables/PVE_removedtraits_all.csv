@@ -1,0 +1,155 @@
+"","Exposure-Outcome","PheWAS_Trait_ID","Description","Variant","PVE"
+"1","Oily fish on Tryglycerides","100012_irnt","Vitamin B6","13:54091069:G:GCA",0.000114056325847009
+"2","Oily fish on Tryglycerides","100021_irnt","Vitamin D","9:106772283:G:A",0.000170905994308456
+"3","Oily fish on Tryglycerides","100150","Drinking water intake","6:155847549:T:C",0.000170100951826352
+"4","Oily fish on Tryglycerides","100250","Instant coffee intake","2:59488019:C:T",0.000179587115347211
+"5","Oily fish on Tryglycerides","100520","Milk intake","12:110057250:G:T",0.000189227833516524
+"6","Oily fish on Tryglycerides","100520","Milk intake","3:24830148:T:C",0.000138385695497299
+"7","Oily fish on Tryglycerides","100670","White wine intake","13:59437165:C:G",0.000210513283616454
+"8","Oily fish on Tryglycerides","100720","Fortified wine intake","20:12495731:C:A",0.000148820366703115
+"9","Oily fish on Tryglycerides","100730","Spirits intake","2:43065555:T:C",0.000177440035047792
+"10","Oily fish on Tryglycerides","100890","Milk added to cereal","16:83683945:A:C",0.000212376467648263
+"11","Oily fish on Tryglycerides","102840","Blue cheese intake","22:32219628:G:A",0.000213099466016047
+"12","Oily fish on Tryglycerides","103060","Poultry intake","14:100279492:G:C",0.000157845411948097
+"13","Oily fish on Tryglycerides","104020","Fried potatoes intake","3:167191652:C:T",0.000136627883618404
+"14","Oily fish on Tryglycerides","104240","Lettuce intake","11:126599247:C:T",0.000120870728030036
+"15","Oily fish on Tryglycerides","20408","Frequency of memory loss due to drinking alcohol in last year","3:146758405:C:T",0.000131688879661215
+"16","Oily fish on Tryglycerides","20436","Fraction of day affected during worst episode of depression","16:58684225:G:A",0.000138922395774389
+"17","Oily fish on Tryglycerides","20439","Frequency of depressed days during worst episode of depression","3:115214586:G:T",0.000166954895620379
+"18","Oily fish on Tryglycerides","20446","Ever had prolonged feelings of sadness or depression","7:14198845:T:G",0.000147523993165208
+"19","Oily fish on Tryglycerides","20494","Felt irritable or had angry outbursts in past month","12:52209986:G:A",0.000114671125092123
+"20","Oily fish on Tryglycerides","20494","Felt irritable or had angry outbursts in past month","2:147484326:G:GT",0.00013941394345061
+"21","Oily fish on Tryglycerides","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","22:31665862:A:G",0.00015104873715324
+"22","Oily fish on Tryglycerides","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","7:3601640:T:A",0.000173850740186339
+"23","Oily fish on Tryglycerides","22610_1","Workplace full of chemical or other fumes: Sometimes","11:79217391:A:G",0.000114680353515177
+"24","Oily fish on Tryglycerides","22660_105","Gap coding: Looking after the home and/or family","6:92337183:G:A",0.000138681266080844
+"25","Oily fish on Tryglycerides","3839","Number of spontaneous miscarriages","16:51492655:A:AG",0.0001347891967511
+"26","Oily fish on Tryglycerides","5113_irnt","6mm cylindrical power angle (left)","13:55961418:C:T",0.000171458791407026
+"27","Oily fish on Cardiovascular Disease","100021_irnt","Vitamin D","9:106772283:G:A",0.000170905994308456
+"28","Oily fish on Cardiovascular Disease","100150","Drinking water intake","6:155847549:T:C",0.000170100951826352
+"29","Oily fish on Cardiovascular Disease","100250","Instant coffee intake","2:59488019:C:T",0.000179587115347211
+"30","Oily fish on Cardiovascular Disease","100520","Milk intake","12:110057250:G:T",0.000189227833516524
+"31","Oily fish on Cardiovascular Disease","100520","Milk intake","3:24830148:T:C",0.000138385695497299
+"32","Oily fish on Cardiovascular Disease","100670","White wine intake","13:59437165:C:G",0.000210513283616454
+"33","Oily fish on Cardiovascular Disease","100710","Beer/cider intake","3:35227201:C:CA",0.000174842944271966
+"34","Oily fish on Cardiovascular Disease","100720","Fortified wine intake","20:12495731:C:A",0.000148820366703115
+"35","Oily fish on Cardiovascular Disease","100730","Spirits intake","2:43065555:T:C",0.000177440035047792
+"36","Oily fish on Cardiovascular Disease","100890","Milk added to cereal","16:83683945:A:C",0.000212376467648263
+"37","Oily fish on Cardiovascular Disease","102840","Blue cheese intake","22:32219628:G:A",0.000213099466016047
+"38","Oily fish on Cardiovascular Disease","103060","Poultry intake","14:100279492:G:C",0.000157845411948097
+"39","Oily fish on Cardiovascular Disease","104020","Fried potatoes intake","3:167188338:CTTTTTTTTT:C",0.000158390113054163
+"40","Oily fish on Cardiovascular Disease","104240","Lettuce intake","11:126599247:C:T",0.000120870728030036
+"41","Oily fish on Cardiovascular Disease","20408","Frequency of memory loss due to drinking alcohol in last year","3:146758405:C:T",0.000131688879661215
+"42","Oily fish on Cardiovascular Disease","20436","Fraction of day affected during worst episode of depression","16:58684225:G:A",0.000138922395774389
+"43","Oily fish on Cardiovascular Disease","20439","Frequency of depressed days during worst episode of depression","3:115214586:G:T",0.000166954895620379
+"44","Oily fish on Cardiovascular Disease","20446","Ever had prolonged feelings of sadness or depression","7:14198845:T:G",0.000147523993165208
+"45","Oily fish on Cardiovascular Disease","20494","Felt irritable or had angry outbursts in past month","12:52209986:G:A",0.000114671125092123
+"46","Oily fish on Cardiovascular Disease","20494","Felt irritable or had angry outbursts in past month","2:147484326:G:GT",0.00013941394345061
+"47","Oily fish on Cardiovascular Disease","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","22:31665862:A:G",0.00015104873715324
+"48","Oily fish on Cardiovascular Disease","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","7:3601640:T:A",0.000173850740186339
+"49","Oily fish on Cardiovascular Disease","22610_1","Workplace full of chemical or other fumes: Sometimes","11:79217391:A:G",0.000114680353515177
+"50","Oily fish on Cardiovascular Disease","22660_105","Gap coding: Looking after the home and/or family","6:92337476:A:AAC",0.00013516310078305
+"51","Oily fish on Cardiovascular Disease","3839","Number of spontaneous miscarriages","16:51492655:A:AG",0.0001347891967511
+"52","Oily fish on Cardiovascular Disease","5113_irnt","6mm cylindrical power angle (left)","13:55961883:GA:G",0.000166055979244282
+"53","Oily fish on Cardiovascular Disease","5292","3mm index of best keratometry results (left)","14:29773840:TAAAC:T",0.000100062572126313
+"54","Oily fish on Cardiovascular Disease","6157_3","Why stopped smoking: Health precaution","5:11980809:ATT:A",0.000139453875946464
+"55","Oily fish on Height","100021_irnt","Vitamin D","9:106775445:C:G",0.00016707332955536
+"56","Oily fish on Height","100150","Drinking water intake","6:155847549:T:C",0.000170100951826352
+"57","Oily fish on Height","100250","Instant coffee intake","2:59488019:C:T",0.000179587115347211
+"58","Oily fish on Height","100670","White wine intake","13:59412819:T:G",0.000220335385920735
+"59","Oily fish on Height","100720","Fortified wine intake","20:12495731:C:A",0.000148820366703115
+"60","Oily fish on Height","100730","Spirits intake","2:43065555:T:C",0.000177440035047792
+"61","Oily fish on Height","100890","Milk added to cereal","16:83683945:A:C",0.000212376467648263
+"62","Oily fish on Height","102840","Blue cheese intake","22:31942770:G:A",0.000144984389080607
+"63","Oily fish on Height","103060","Poultry intake","14:100279492:G:C",0.000157845411948097
+"64","Oily fish on Height","104020","Fried potatoes intake","3:167191652:C:T",0.000136627883618404
+"65","Oily fish on Height","104240","Lettuce intake","11:126601540:G:T",0.000120488318817539
+"66","Oily fish on Height","20408","Frequency of memory loss due to drinking alcohol in last year","3:146758405:C:T",0.000131688879661215
+"67","Oily fish on Height","20436","Fraction of day affected during worst episode of depression","16:58683979:T:C",0.000145491721840605
+"68","Oily fish on Height","20446","Ever had prolonged feelings of sadness or depression","7:14198845:T:G",0.000147523993165208
+"69","Oily fish on Height","20494","Felt irritable or had angry outbursts in past month","12:52210091:T:G",0.000122475878580411
+"70","Oily fish on Height","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","22:31665862:A:G",0.00015104873715324
+"71","Oily fish on Height","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","7:3601640:T:A",0.000173850740186339
+"72","Oily fish on Height","22660_105","Gap coding: Looking after the home and/or family","6:92337183:G:A",0.000138681266080844
+"73","Oily fish on Height","3761_irnt","Age hay fever, rhinitis or eczema diagnosed","3:24825618:C:G",0.000121272384778975
+"74","Oily fish on Height","5113_irnt","6mm cylindrical power angle (left)","13:55961418:C:T",0.000171458791407026
+"75","White vs Whole Grain or Brown Bread on LDL Cholesterol","100008_irnt","Total sugars","18:24125857:T:C",0.000107901631839957
+"76","White vs Whole Grain or Brown Bread on LDL Cholesterol","100370","Intake of sugar added to coffee","4:101774236:G:C",0.000224204716791178
+"77","White vs Whole Grain or Brown Bread on LDL Cholesterol","100630","Rose wine intake","8:65709467:G:A",0.000123555404665637
+"78","White vs Whole Grain or Brown Bread on LDL Cholesterol","102440","Unsalted nuts intake","9:87275348:G:T",0.000160989673746122
+"79","White vs Whole Grain or Brown Bread on LDL Cholesterol","102800","Cheese consumers","2:166318574:T:C",0.000162796268381853
+"80","White vs Whole Grain or Brown Bread on LDL Cholesterol","103060","Poultry intake","15:76101535:C:T",0.000115374068357884
+"81","White vs Whole Grain or Brown Bread on LDL Cholesterol","104910","Time spent doing moderate physical activity","6:129225631:A:C",0.00017415236757296
+"82","White vs Whole Grain or Brown Bread on LDL Cholesterol","20408","Frequency of memory loss due to drinking alcohol in last year","3:34204000:G:A",0.000137542912832446
+"83","White vs Whole Grain or Brown Bread on LDL Cholesterol","22126","Doctor diagnosed hayfever or allergic rhinitis","4:42078241:A:G",0.000148771887324309
+"84","White vs Whole Grain or Brown Bread on LDL Cholesterol","5084_irnt","Spherical power (right)","10:126594360:CT:C",0.000193723733742567
+"85","White vs Whole Grain or Brown Bread on LDL Cholesterol","6039","Duration of fitness test","3:89240855:A:G",0.000210495599077324
+"86","White vs Whole Grain or Brown Bread on Cardiovascular Disease","100008_irnt","Total sugars","18:24125857:T:C",0.000107901631839957
+"87","White vs Whole Grain or Brown Bread on Cardiovascular Disease","100370","Intake of sugar added to coffee","4:101774236:G:C",0.000224204716791178
+"88","White vs Whole Grain or Brown Bread on Cardiovascular Disease","100630","Rose wine intake","8:65709467:G:A",0.000123555404665637
+"89","White vs Whole Grain or Brown Bread on Cardiovascular Disease","102440","Unsalted nuts intake","9:87275348:G:T",0.000160989673746122
+"90","White vs Whole Grain or Brown Bread on Cardiovascular Disease","102800","Cheese consumers","2:166318574:T:C",0.000162796268381853
+"91","White vs Whole Grain or Brown Bread on Cardiovascular Disease","103060","Poultry intake","15:76101535:C:T",0.000115374068357884
+"92","White vs Whole Grain or Brown Bread on Cardiovascular Disease","104910","Time spent doing moderate physical activity","6:129225631:A:C",0.00017415236757296
+"93","White vs Whole Grain or Brown Bread on Cardiovascular Disease","20408","Frequency of memory loss due to drinking alcohol in last year","3:34204000:G:A",0.000137542912832446
+"94","White vs Whole Grain or Brown Bread on Cardiovascular Disease","22126","Doctor diagnosed hayfever or allergic rhinitis","4:42078241:A:G",0.000148771887324309
+"95","White vs Whole Grain or Brown Bread on Cardiovascular Disease","5084_irnt","Spherical power (right)","10:126594360:CT:C",0.000193723733742567
+"96","White vs Whole Grain or Brown Bread on Cardiovascular Disease","6039","Duration of fitness test","3:89240855:A:G",0.000210495599077324
+"97","White vs Whole Grain or Brown Bread on Height","100008_irnt","Total sugars","18:24125857:T:C",0.000107901631839957
+"98","White vs Whole Grain or Brown Bread on Height","100370","Intake of sugar added to coffee","4:101774236:G:C",0.000224204716791178
+"99","White vs Whole Grain or Brown Bread on Height","100630","Rose wine intake","8:65709467:G:A",0.000123555404665637
+"100","White vs Whole Grain or Brown Bread on Height","102440","Unsalted nuts intake","9:87275348:G:T",0.000160989673746122
+"101","White vs Whole Grain or Brown Bread on Height","102800","Cheese consumers","2:166318574:T:C",0.000162796268381853
+"102","White vs Whole Grain or Brown Bread on Height","104910","Time spent doing moderate physical activity","6:129283603:A:G",0.000196673662667946
+"103","White vs Whole Grain or Brown Bread on Height","20408","Frequency of memory loss due to drinking alcohol in last year","3:34204000:G:A",0.000137542912832446
+"104","White vs Whole Grain or Brown Bread on Height","22126","Doctor diagnosed hayfever or allergic rhinitis","4:42078241:A:G",0.000148771887324309
+"105","White vs Whole Grain or Brown Bread on Height","6039","Duration of fitness test","3:88999823:G:A",0.000286680365274798
+"106","Alcohol on Alanine Aminotransferase","100001_irnt","Food weight","16:72628693:C:A",0.000316361493868064
+"107","Alcohol on Alanine Aminotransferase","100003_irnt","Protein","4:135900688:T:C",0.000131143702825958
+"108","Alcohol on Alanine Aminotransferase","100012_irnt","Vitamin B6","4:184828533:C:A",0.000161692607066353
+"109","Alcohol on Alanine Aminotransferase","102460","Crisp intake","13:49986118:A:G",0.00011270333550028
+"110","Alcohol on Alanine Aminotransferase","104020","Fried potatoes intake","17:7604471:A:G",0.000135674852660418
+"111","Alcohol on Alanine Aminotransferase","104090","Side salad intake","1:4569436:T:A",0.000106953295470055
+"112","Alcohol on Alanine Aminotransferase","104450","Apple intake","5:144204346:G:A",0.000202579483954429
+"113","Alcohol on Alanine Aminotransferase","104460","Banana intake","16:73912588:G:C",0.000127121307347789
+"114","Alcohol on Alanine Aminotransferase","104460","Banana intake","1:952494:A:AT",0.000172339541240533
+"115","Alcohol on Alanine Aminotransferase","20416","Frequency of consuming six or more units of alcohol","4:39414993:A:G",0.000344911146534524
+"116","Alcohol on Alanine Aminotransferase","20433_irnt","Age at first episode of depression","16:13746413:CTT:C",0.000199861449363738
+"117","Alcohol on Alanine Aminotransferase","22126","Doctor diagnosed hayfever or allergic rhinitis","11:133780757:G:A",0.000124582533312589
+"118","Alcohol on Alanine Aminotransferase","22660_105","Gap coding: Looking after the home and/or family","12:51988518:A:C",7.58890653389287e-05
+"119","Alcohol on Alanine Aminotransferase","2867_irnt","Age started smoking in former smokers","2:211454133:G:A",0.000140555292962505
+"120","Alcohol on Alanine Aminotransferase","4609_irnt","Longest period of depression","16:22903022:A:T",0.000172818523625153
+"121","Alcohol on Alanine Aminotransferase","5084_irnt","Spherical power (right)","1:216681000:T:C",0.000103114269029156
+"122","Alcohol on Alanine Aminotransferase","5101_irnt","6mm weak meridian angle (right)","14:56846715:C:A",0.000107456808069655
+"123","Alcohol on Liver Cirrhosis","100012_irnt","Vitamin B6","4:184828533:C:A",0.000161692607066353
+"124","Alcohol on Liver Cirrhosis","102460","Crisp intake","13:49986118:A:G",0.00011270333550028
+"125","Alcohol on Liver Cirrhosis","104020","Fried potatoes intake","17:7604471:A:G",0.000135674852660418
+"126","Alcohol on Liver Cirrhosis","104090","Side salad intake","1:4569436:T:A",0.000106953295470055
+"127","Alcohol on Liver Cirrhosis","104340","Fresh tomato intake","16:13746548:G:A",0.000238671961759057
+"128","Alcohol on Liver Cirrhosis","104450","Apple intake","5:144204346:G:A",0.000202579483954429
+"129","Alcohol on Liver Cirrhosis","104460","Banana intake","16:73912588:G:C",0.000127121307347789
+"130","Alcohol on Liver Cirrhosis","104460","Banana intake","1:952003:G:A",0.000170805675958179
+"131","Alcohol on Liver Cirrhosis","20416","Frequency of consuming six or more units of alcohol","4:39414993:A:G",0.000344911146534524
+"132","Alcohol on Liver Cirrhosis","20433_irnt","Age at first episode of depression","16:72706927:A:G",0.00012034810209169
+"133","Alcohol on Liver Cirrhosis","22126","Doctor diagnosed hayfever or allergic rhinitis","11:133780757:G:A",0.000124582533312589
+"134","Alcohol on Liver Cirrhosis","22660_105","Gap coding: Looking after the home and/or family","12:51988518:A:C",7.58890653389287e-05
+"135","Alcohol on Liver Cirrhosis","2867_irnt","Age started smoking in former smokers","2:211454133:G:A",0.000140555292962505
+"136","Alcohol on Liver Cirrhosis","4609_irnt","Longest period of depression","16:22903022:A:T",0.000172818523625153
+"137","Alcohol on Liver Cirrhosis","5084_irnt","Spherical power (right)","1:216681000:T:C",0.000103114269029156
+"138","Alcohol on Liver Cirrhosis","5101_irnt","6mm weak meridian angle (right)","14:56846715:C:A",0.000107456808069655
+"139","Alcohol on Liver Cirrhosis","5115_irnt","3mm cylindrical power angle (right)","2:74226102:C:T",0.000183301682366603
+"140","Alcohol on Height","100001_irnt","Food weight","16:72594387:C:T",0.000261212687320427
+"141","Alcohol on Height","100003_irnt","Protein","4:135900688:T:C",0.000131143702825958
+"142","Alcohol on Height","102460","Crisp intake","13:49986602:A:G",0.000111924943280244
+"143","Alcohol on Height","102820","Hard cheese intake","17:7606722:C:G",0.00016951646915801
+"144","Alcohol on Height","104090","Side salad intake","1:4569436:T:A",0.000106953295470055
+"145","Alcohol on Height","104340","Fresh tomato intake","16:13747292:C:A",0.000237786256213368
+"146","Alcohol on Height","104450","Apple intake","5:144202561:T:C",0.000199439972840857
+"147","Alcohol on Height","104460","Banana intake","16:73912588:G:C",0.000127121307347789
+"148","Alcohol on Height","104920","Time spent doing light physical activity","2:97797225:C:T",0.000181179597932037
+"149","Alcohol on Height","20416","Frequency of consuming six or more units of alcohol","4:39414993:A:G",0.000344911146534524
+"150","Alcohol on Height","22126","Doctor diagnosed hayfever or allergic rhinitis","11:133780757:G:A",0.000124582533312589
+"151","Alcohol on Height","2684","Years since last breast cancer screening / mammogram","1:216690332:A:G",0.000106652419706659
+"152","Alcohol on Height","2867_irnt","Age started smoking in former smokers","2:211464553:C:T",0.000142510982170083
+"153","Alcohol on Height","5101_irnt","6mm weak meridian angle (right)","14:56846715:C:A",0.000107456808069655
+"154","Alcohol on Height","5115_irnt","3mm cylindrical power angle (right)","2:74226102:C:T",0.000183301682366603

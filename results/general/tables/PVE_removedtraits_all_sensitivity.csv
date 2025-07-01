@@ -1,0 +1,164 @@
+"","Exposure-Outcome","PheWAS_Trait_ID","Description","Variant","PVE"
+"1","Oily fish on Tryglycerides","20408","Frequency of memory loss due to drinking alcohol in last year","3:146758405:C:T",0.000131688879661215
+"2","Oily fish on Tryglycerides","20409","Frequency of feeling guilt or remorse after drinking alcohol in last year","13:59437165:C:G",0.000112083711735592
+"3","Oily fish on Tryglycerides","20433_irnt","Age at first episode of depression","3:167191652:C:T",9.02341618388483e-05
+"4","Oily fish on Tryglycerides","20436","Fraction of day affected during worst episode of depression","16:58684225:G:A",0.000138922395774389
+"5","Oily fish on Tryglycerides","20439","Frequency of depressed days during worst episode of depression","3:115214586:G:T",0.000166954895620379
+"6","Oily fish on Tryglycerides","20446","Ever had prolonged feelings of sadness or depression","7:14198845:T:G",0.000147523993165208
+"7","Oily fish on Tryglycerides","20491","Someone to take to doctor when needed as a child","16:83683945:A:C",0.000109068745913285
+"8","Oily fish on Tryglycerides","20494","Felt irritable or had angry outbursts in past month","12:52209986:G:A",0.000114671125092123
+"9","Oily fish on Tryglycerides","20494","Felt irritable or had angry outbursts in past month","2:147484326:G:GT",0.00013941394345061
+"10","Oily fish on Tryglycerides","20519","Recent feelings of tiredness or low energy","12:110057250:G:T",0.000133680934867147
+"11","Oily fish on Tryglycerides","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","22:31665862:A:G",0.00015104873715324
+"12","Oily fish on Tryglycerides","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","18:58853208:C:T",9.5503121187729e-05
+"13","Oily fish on Tryglycerides","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","7:3601640:T:A",0.000173850740186339
+"14","Oily fish on Tryglycerides","22610_1","Workplace full of chemical or other fumes: Sometimes","11:79217391:A:G",0.000114680353515177
+"15","Oily fish on Tryglycerides","22660_105","Gap coding: Looking after the home and/or family","6:92337183:G:A",0.000138681266080844
+"16","Oily fish on Tryglycerides","2887","Number of cigarettes previously smoked daily","11:126599247:C:T",0.000118660592478324
+"17","Oily fish on Tryglycerides","3571","Back pain for 3+ months","14:100279492:G:C",0.000154103012529324
+"18","Oily fish on Tryglycerides","3773","Knee pain for 3+ months","6:155847549:T:C",0.000168934133076018
+"19","Oily fish on Tryglycerides","3799","Headaches for 3+ months","20:12495731:C:A",6.96699861024095e-05
+"20","Oily fish on Tryglycerides","3839","Number of spontaneous miscarriages","16:51492655:A:AG",0.0001347891967511
+"21","Oily fish on Tryglycerides","4990","FI6 : conditional arithmetic","3:24830148:T:C",0.000120710142656061
+"22","Oily fish on Tryglycerides","5088_irnt","Astigmatism angle (right)","22:32219628:G:A",9.21152107552916e-05
+"23","Oily fish on Tryglycerides","5105_irnt","6mm strong meridian angle (left)","13:54091069:G:GCA",9.88371319673337e-05
+"24","Oily fish on Tryglycerides","5113_irnt","6mm cylindrical power angle (left)","13:55961418:C:T",0.000171458791407026
+"25","Oily fish on Tryglycerides","5114_irnt","6mm cylindrical power angle (right)","9:106772283:G:A",0.000134343684122122
+"26","Oily fish on Tryglycerides","5983_irnt","ECG, heart rate","2:59488019:C:T",0.000175902161637892
+"27","Oily fish on Tryglycerides","6039","Duration of fitness test","2:43065555:T:C",0.000110844817950194
+"28","Oily fish on Cardiovascular Disease","20408","Frequency of memory loss due to drinking alcohol in last year","3:146758405:C:T",0.000131688879661215
+"29","Oily fish on Cardiovascular Disease","20409","Frequency of feeling guilt or remorse after drinking alcohol in last year","13:59437165:C:G",0.000112083711735592
+"30","Oily fish on Cardiovascular Disease","20436","Fraction of day affected during worst episode of depression","16:58684225:G:A",0.000138922395774389
+"31","Oily fish on Cardiovascular Disease","20439","Frequency of depressed days during worst episode of depression","3:115214586:G:T",0.000166954895620379
+"32","Oily fish on Cardiovascular Disease","20439","Frequency of depressed days during worst episode of depression","3:167188338:CTTTTTTTTT:C",9.53088900310905e-05
+"33","Oily fish on Cardiovascular Disease","20446","Ever had prolonged feelings of sadness or depression","7:14198845:T:G",0.000147523993165208
+"34","Oily fish on Cardiovascular Disease","20491","Someone to take to doctor when needed as a child","16:83683945:A:C",0.000109068745913285
+"35","Oily fish on Cardiovascular Disease","20494","Felt irritable or had angry outbursts in past month","12:52209986:G:A",0.000114671125092123
+"36","Oily fish on Cardiovascular Disease","20494","Felt irritable or had angry outbursts in past month","2:147484326:G:GT",0.00013941394345061
+"37","Oily fish on Cardiovascular Disease","20519","Recent feelings of tiredness or low energy","12:110057250:G:T",0.000133680934867147
+"38","Oily fish on Cardiovascular Disease","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","22:31665862:A:G",0.00015104873715324
+"39","Oily fish on Cardiovascular Disease","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","18:58853208:C:T",9.5503121187729e-05
+"40","Oily fish on Cardiovascular Disease","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","7:3601640:T:A",0.000173850740186339
+"41","Oily fish on Cardiovascular Disease","22610_1","Workplace full of chemical or other fumes: Sometimes","11:79217391:A:G",0.000114680353515177
+"42","Oily fish on Cardiovascular Disease","22660_105","Gap coding: Looking after the home and/or family","6:92337476:A:AAC",0.00013516310078305
+"43","Oily fish on Cardiovascular Disease","2887","Number of cigarettes previously smoked daily","11:126599247:C:T",0.000118660592478324
+"44","Oily fish on Cardiovascular Disease","3571","Back pain for 3+ months","14:100279492:G:C",0.000154103012529324
+"45","Oily fish on Cardiovascular Disease","3773","Knee pain for 3+ months","6:155847549:T:C",0.000168934133076018
+"46","Oily fish on Cardiovascular Disease","3799","Headaches for 3+ months","20:12495731:C:A",6.96699861024095e-05
+"47","Oily fish on Cardiovascular Disease","3839","Number of spontaneous miscarriages","16:51492655:A:AG",0.0001347891967511
+"48","Oily fish on Cardiovascular Disease","4990","FI6 : conditional arithmetic","3:24830148:T:C",0.000120710142656061
+"49","Oily fish on Cardiovascular Disease","5088_irnt","Astigmatism angle (right)","22:32219628:G:A",9.21152107552916e-05
+"50","Oily fish on Cardiovascular Disease","5113_irnt","6mm cylindrical power angle (left)","13:55961883:GA:G",0.000166055979244282
+"51","Oily fish on Cardiovascular Disease","5114_irnt","6mm cylindrical power angle (right)","9:106772283:G:A",0.000134343684122122
+"52","Oily fish on Cardiovascular Disease","5237","3mm index of best keratometry results (right)","3:35227201:C:CA",0.000103364929015361
+"53","Oily fish on Cardiovascular Disease","5292","3mm index of best keratometry results (left)","14:29773840:TAAAC:T",0.000100062572126313
+"54","Oily fish on Cardiovascular Disease","5983_irnt","ECG, heart rate","2:59488019:C:T",0.000175902161637892
+"55","Oily fish on Cardiovascular Disease","6039","Duration of fitness test","2:43065555:T:C",0.000110844817950194
+"56","Oily fish on Cardiovascular Disease","6157_3","Why stopped smoking: Health precaution","5:11980809:ATT:A",0.000139453875946464
+"57","Oily fish on Height","104900","Time spent doing vigorous physical activity","13:59412819:T:G",0.000104046041406266
+"58","Oily fish on Height","20408","Frequency of memory loss due to drinking alcohol in last year","3:146758405:C:T",0.000131688879661215
+"59","Oily fish on Height","20433_irnt","Age at first episode of depression","3:167191652:C:T",9.02341618388483e-05
+"60","Oily fish on Height","20436","Fraction of day affected during worst episode of depression","16:58683979:T:C",0.000145491721840605
+"61","Oily fish on Height","20446","Ever had prolonged feelings of sadness or depression","7:14198845:T:G",0.000147523993165208
+"62","Oily fish on Height","20491","Someone to take to doctor when needed as a child","16:83683945:A:C",0.000109068745913285
+"63","Oily fish on Height","20494","Felt irritable or had angry outbursts in past month","12:52210091:T:G",0.000122475878580411
+"64","Oily fish on Height","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","18:58853324:A:G",0.000107749517979963
+"65","Oily fish on Height","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","22:31665862:A:G",0.00015104873715324
+"66","Oily fish on Height","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","22:31942770:G:A",7.95454184364707e-05
+"67","Oily fish on Height","20536_0","Weight change during worst episode of depression: Stayed about the same or was on a diet","7:3601640:T:A",0.000173850740186339
+"68","Oily fish on Height","22660_105","Gap coding: Looking after the home and/or family","6:92337183:G:A",0.000138681266080844
+"69","Oily fish on Height","2887","Number of cigarettes previously smoked daily","11:126601540:G:T",0.000110084772933801
+"70","Oily fish on Height","3571","Back pain for 3+ months","14:100279492:G:C",0.000154103012529324
+"71","Oily fish on Height","3761_irnt","Age hay fever, rhinitis or eczema diagnosed","3:24825618:C:G",0.000121272384778975
+"72","Oily fish on Height","3773","Knee pain for 3+ months","6:155847549:T:C",0.000168934133076018
+"73","Oily fish on Height","3799","Headaches for 3+ months","20:12495731:C:A",6.96699861024095e-05
+"74","Oily fish on Height","5113_irnt","6mm cylindrical power angle (left)","13:55961418:C:T",0.000171458791407026
+"75","Oily fish on Height","5114_irnt","6mm cylindrical power angle (right)","9:106775445:C:G",0.000135826762765179
+"76","Oily fish on Height","5983_irnt","ECG, heart rate","2:59488019:C:T",0.000175902161637892
+"77","Oily fish on Height","6039","Duration of fitness test","2:43065555:T:C",0.000110844817950194
+"78","White vs Whole Grain or Brown Bread on LDL Cholesterol","104910","Time spent doing moderate physical activity","6:129225631:A:C",0.00017415236757296
+"79","White vs Whole Grain or Brown Bread on LDL Cholesterol","20408","Frequency of memory loss due to drinking alcohol in last year","3:34204000:G:A",0.000137542912832446
+"80","White vs Whole Grain or Brown Bread on LDL Cholesterol","20434_irnt","Age at last episode of depression","15:76101535:C:T",0.000114145779939603
+"81","White vs Whole Grain or Brown Bread on LDL Cholesterol","20437","Thoughts of death during worst depression","4:101774236:G:C",0.000132241368886774
+"82","White vs Whole Grain or Brown Bread on LDL Cholesterol","20448","Professional informed about depression","2:166318574:T:C",0.000128785199739913
+"83","White vs Whole Grain or Brown Bread on LDL Cholesterol","20488","Physically abused by family as a child","8:65709467:G:A",0.000105726131062831
+"84","White vs Whole Grain or Brown Bread on LDL Cholesterol","20511","Recent poor appetite or overeating","12:110051767:TG:T",0.000132154363202547
+"85","White vs Whole Grain or Brown Bread on LDL Cholesterol","22126","Doctor diagnosed hayfever or allergic rhinitis","4:42078241:A:G",0.000148771887324309
+"86","White vs Whole Grain or Brown Bread on LDL Cholesterol","22501_irnt","Year ended full time education","9:87275348:G:T",0.000145040751205645
+"87","White vs Whole Grain or Brown Bread on LDL Cholesterol","22660_105","Gap coding: Looking after the home and/or family","18:24125857:T:C",0.000104739017934897
+"88","White vs Whole Grain or Brown Bread on LDL Cholesterol","5084_irnt","Spherical power (right)","10:126594360:CT:C",0.000193723733742567
+"89","White vs Whole Grain or Brown Bread on LDL Cholesterol","6039","Duration of fitness test","3:89240855:A:G",0.000210495599077324
+"90","White vs Whole Grain or Brown Bread on Cardiovascular Disease","104910","Time spent doing moderate physical activity","6:129225631:A:C",0.00017415236757296
+"91","White vs Whole Grain or Brown Bread on Cardiovascular Disease","20408","Frequency of memory loss due to drinking alcohol in last year","3:34204000:G:A",0.000137542912832446
+"92","White vs Whole Grain or Brown Bread on Cardiovascular Disease","20434_irnt","Age at last episode of depression","15:76101535:C:T",0.000114145779939603
+"93","White vs Whole Grain or Brown Bread on Cardiovascular Disease","20437","Thoughts of death during worst depression","4:101774236:G:C",0.000132241368886774
+"94","White vs Whole Grain or Brown Bread on Cardiovascular Disease","20448","Professional informed about depression","2:166318574:T:C",0.000128785199739913
+"95","White vs Whole Grain or Brown Bread on Cardiovascular Disease","20488","Physically abused by family as a child","8:65709467:G:A",0.000105726131062831
+"96","White vs Whole Grain or Brown Bread on Cardiovascular Disease","20511","Recent poor appetite or overeating","12:110051767:TG:T",0.000132154363202547
+"97","White vs Whole Grain or Brown Bread on Cardiovascular Disease","22126","Doctor diagnosed hayfever or allergic rhinitis","4:42078241:A:G",0.000148771887324309
+"98","White vs Whole Grain or Brown Bread on Cardiovascular Disease","22501_irnt","Year ended full time education","9:87275348:G:T",0.000145040751205645
+"99","White vs Whole Grain or Brown Bread on Cardiovascular Disease","22660_105","Gap coding: Looking after the home and/or family","18:24125857:T:C",0.000104739017934897
+"100","White vs Whole Grain or Brown Bread on Cardiovascular Disease","5084_irnt","Spherical power (right)","10:126594360:CT:C",0.000193723733742567
+"101","White vs Whole Grain or Brown Bread on Cardiovascular Disease","6039","Duration of fitness test","3:89240855:A:G",0.000210495599077324
+"102","White vs Whole Grain or Brown Bread on Height","104910","Time spent doing moderate physical activity","6:129283603:A:G",0.000196673662667946
+"103","White vs Whole Grain or Brown Bread on Height","20408","Frequency of memory loss due to drinking alcohol in last year","3:34204000:G:A",0.000137542912832446
+"104","White vs Whole Grain or Brown Bread on Height","20437","Thoughts of death during worst depression","4:101774236:G:C",0.000132241368886774
+"105","White vs Whole Grain or Brown Bread on Height","20448","Professional informed about depression","2:166318574:T:C",0.000128785199739913
+"106","White vs Whole Grain or Brown Bread on Height","20488","Physically abused by family as a child","8:65709467:G:A",0.000105726131062831
+"107","White vs Whole Grain or Brown Bread on Height","22126","Doctor diagnosed hayfever or allergic rhinitis","4:42078241:A:G",0.000148771887324309
+"108","White vs Whole Grain or Brown Bread on Height","22501_irnt","Year ended full time education","9:87275348:G:T",0.000145040751205645
+"109","White vs Whole Grain or Brown Bread on Height","22660_105","Gap coding: Looking after the home and/or family","18:24125857:T:C",0.000104739017934897
+"110","White vs Whole Grain or Brown Bread on Height","6039","Duration of fitness test","3:88999823:G:A",0.000286680365274798
+"111","Alcohol on Alanine Aminotransferase","20408","Frequency of memory loss due to drinking alcohol in last year","16:72628693:C:A",9.70887225639573e-05
+"112","Alcohol on Alanine Aminotransferase","20433_irnt","Age at first episode of depression","16:13746413:CTT:C",0.000199861449363738
+"113","Alcohol on Alanine Aminotransferase","20450","Feelings of worthlessness during worst period of depression","13:49986118:A:G",0.000106681166631676
+"114","Alcohol on Alanine Aminotransferase","20494","Felt irritable or had angry outbursts in past month","16:73912588:G:C",0.000119444054583122
+"115","Alcohol on Alanine Aminotransferase","20536_2","Weight change during worst episode of depression: Lost weight","5:144204346:G:A",0.000121525860791459
+"116","Alcohol on Alanine Aminotransferase","22126","Doctor diagnosed hayfever or allergic rhinitis","11:133780757:G:A",0.000124582533312589
+"117","Alcohol on Alanine Aminotransferase","22660_105","Gap coding: Looking after the home and/or family","12:51988518:A:C",7.58890653389287e-05
+"118","Alcohol on Alanine Aminotransferase","2395_1","Hair/balding pattern: Pattern 1","17:7604471:A:G",7.58911725194621e-05
+"119","Alcohol on Alanine Aminotransferase","2664_3","Reason for reducing amount of alcohol drunk: Health precaution","4:39414993:A:G",0.000220005041694806
+"120","Alcohol on Alanine Aminotransferase","2867_irnt","Age started smoking in former smokers","2:211454133:G:A",0.000140555292962505
+"121","Alcohol on Alanine Aminotransferase","40009","Reported occurrences of cancer","1:4569436:T:A",8.6828962861083e-05
+"122","Alcohol on Alanine Aminotransferase","4609_irnt","Longest period of depression","16:22903022:A:T",0.000172818523625153
+"123","Alcohol on Alanine Aminotransferase","5084_irnt","Spherical power (right)","1:216681000:T:C",0.000103114269029156
+"124","Alcohol on Alanine Aminotransferase","5089_irnt","Astigmatism angle (left)","4:135900688:T:C",0.000114668835363406
+"125","Alcohol on Alanine Aminotransferase","5097_irnt","6mm weak meridian (left)","4:184828533:C:A",0.000145607333504935
+"126","Alcohol on Alanine Aminotransferase","5099_irnt","3mm weak meridian (right)","1:952494:A:AT",0.00012659340163528
+"127","Alcohol on Alanine Aminotransferase","5101_irnt","6mm weak meridian angle (right)","14:56846715:C:A",0.000107456808069655
+"128","Alcohol on Alanine Aminotransferase","5251","6mm index of best keratometry results (right)","7:141668403:G:T",9.64645038215887e-05
+"129","Alcohol on Alanine Aminotransferase","6033_irnt","Maximum heart rate during fitness test","22:24666311:A:G",8.77366202099435e-05
+"130","Alcohol on Liver Cirrhosis","20433_irnt","Age at first episode of depression","16:13746548:G:A",0.000193613450841669
+"131","Alcohol on Liver Cirrhosis","20433_irnt","Age at first episode of depression","16:72706927:A:G",0.00012034810209169
+"132","Alcohol on Liver Cirrhosis","20450","Feelings of worthlessness during worst period of depression","13:49986118:A:G",0.000106681166631676
+"133","Alcohol on Liver Cirrhosis","20494","Felt irritable or had angry outbursts in past month","16:73912588:G:C",0.000119444054583122
+"134","Alcohol on Liver Cirrhosis","20536_2","Weight change during worst episode of depression: Lost weight","5:144204346:G:A",0.000121525860791459
+"135","Alcohol on Liver Cirrhosis","22126","Doctor diagnosed hayfever or allergic rhinitis","11:133780757:G:A",0.000124582533312589
+"136","Alcohol on Liver Cirrhosis","22660_105","Gap coding: Looking after the home and/or family","12:51988518:A:C",7.58890653389287e-05
+"137","Alcohol on Liver Cirrhosis","2395_1","Hair/balding pattern: Pattern 1","17:7604471:A:G",7.58911725194621e-05
+"138","Alcohol on Liver Cirrhosis","2664_3","Reason for reducing amount of alcohol drunk: Health precaution","4:39414993:A:G",0.000220005041694806
+"139","Alcohol on Liver Cirrhosis","2867_irnt","Age started smoking in former smokers","2:211454133:G:A",0.000140555292962505
+"140","Alcohol on Liver Cirrhosis","40009","Reported occurrences of cancer","1:4569436:T:A",8.6828962861083e-05
+"141","Alcohol on Liver Cirrhosis","4609_irnt","Longest period of depression","16:22903022:A:T",0.000172818523625153
+"142","Alcohol on Liver Cirrhosis","5084_irnt","Spherical power (right)","1:216681000:T:C",0.000103114269029156
+"143","Alcohol on Liver Cirrhosis","5097_irnt","6mm weak meridian (left)","4:184828533:C:A",0.000145607333504935
+"144","Alcohol on Liver Cirrhosis","5099_irnt","3mm weak meridian (right)","1:952003:G:A",0.000126309976757167
+"145","Alcohol on Liver Cirrhosis","5101_irnt","6mm weak meridian angle (right)","14:56846715:C:A",0.000107456808069655
+"146","Alcohol on Liver Cirrhosis","5115_irnt","3mm cylindrical power angle (right)","2:74226102:C:T",0.000183301682366603
+"147","Alcohol on Liver Cirrhosis","5251","6mm index of best keratometry results (right)","7:141668403:G:T",9.64645038215887e-05
+"148","Alcohol on Height","104920","Time spent doing light physical activity","2:97797225:C:T",0.000181179597932037
+"149","Alcohol on Height","20433_irnt","Age at first episode of depression","16:13747292:C:A",0.000194864522298305
+"150","Alcohol on Height","20433_irnt","Age at first episode of depression","16:72594387:C:T",9.01844913389689e-05
+"151","Alcohol on Height","20494","Felt irritable or had angry outbursts in past month","16:73912588:G:C",0.000119444054583122
+"152","Alcohol on Height","20536_2","Weight change during worst episode of depression: Lost weight","5:144202561:T:C",0.000117672981964267
+"153","Alcohol on Height","22126","Doctor diagnosed hayfever or allergic rhinitis","11:133780757:G:A",0.000124582533312589
+"154","Alcohol on Height","2664_3","Reason for reducing amount of alcohol drunk: Health precaution","4:39414993:A:G",0.000220005041694806
+"155","Alcohol on Height","2684","Years since last breast cancer screening / mammogram","1:216690332:A:G",0.000106652419706659
+"156","Alcohol on Height","2684","Years since last breast cancer screening / mammogram","7:141673345:C:G",9.13599928400626e-05
+"157","Alcohol on Height","2867_irnt","Age started smoking in former smokers","2:211464553:C:T",0.000142510982170083
+"158","Alcohol on Height","40009","Reported occurrences of cancer","1:4569436:T:A",8.6828962861083e-05
+"159","Alcohol on Height","5012","FI8 : chained arithmetic","13:49986602:A:G",0.000103881073757069
+"160","Alcohol on Height","5089_irnt","Astigmatism angle (left)","4:135900688:T:C",0.000114668835363406
+"161","Alcohol on Height","5101_irnt","6mm weak meridian angle (right)","14:56846715:C:A",0.000107456808069655
+"162","Alcohol on Height","5115_irnt","3mm cylindrical power angle (right)","2:74226102:C:T",0.000183301682366603
+"163","Alcohol on Height","6039","Duration of fitness test","17:7606722:C:G",9.82824552875131e-05

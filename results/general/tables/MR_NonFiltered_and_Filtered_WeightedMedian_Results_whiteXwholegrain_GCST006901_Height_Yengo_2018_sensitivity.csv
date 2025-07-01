@@ -1,0 +1,8 @@
+"","exposure","outcome","Method","Estimate","Std Error","95% CI "," ","P-value","GI","N_snps"
+"1","White vs Whole Grain Bread","Height","Weighted median",-0.178040099055003,0.0448317629895602,-0.265908739877977,-0.0901714582320291,7.14833794453613e-05,"all",34
+"2","White vs Whole Grain Bread","Height","Weighted median",-0.0725644915909016,0.0461932757014547,-0.163101648293682,0.0179726651118789,0.116208520029237,"Steiger Filtered",29
+"3","White vs Whole Grain Bread","Height","Weighted median",-0.140208287202136,0.0486886873999245,-0.235636360960517,-0.044780213443755,0.00398067374290816,"PheWAS T-test Filtered",26
+"4","White vs Whole Grain Bread","Height","Weighted median",-0.140208287202136,0.0486886873999245,-0.235636360960517,-0.044780213443755,0.00398067374290816,"PheWAS T-test Filtered - Sensitivity",26
+"5","White vs Whole Grain Bread","Height","Weighted median",-0.237564179221928,0.0571002935680767,-0.349478698122023,-0.125649660321834,3.17590391696191e-05,"PheWAS PVE Filtered",25
+"6","White vs Whole Grain Bread","Height","Weighted median",-0.237564179221928,0.0571002935680767,-0.349478698122023,-0.125649660321834,3.17590391696191e-05,"PheWAS PVE Filtered - Sensitivity",25
+"7","White vs Whole Grain Bread","Height","Weighted median",-0.157571043733138,0.0713611350451153,-0.297436298317463,-0.0177057891488127,0.0272387470632232,"Core GI",16

@@ -1,0 +1,6 @@
+"","exposure","outcome","Method","Estimate","Std Error","95% CI "," ","P-value","GI","N_snps"
+"1","Oily fish","Cardiovascular Disease","Weighted median",0.0807378002849162,0.0716216351237337,-0.0596380250714708,0.221113625641303,0.259623151106356,"all",78
+"2","Oily fish","Cardiovascular Disease","Weighted median",0.0807378002849162,0.0716216351237337,-0.0596380250714708,0.221113625641303,0.259623151106356,"Steiger Filtered",78
+"3","Oily fish","Cardiovascular Disease","Weighted median",0.00202825706120498,0.0791700916785399,-0.153142271281467,0.157198785403877,0.979561246523446,"PheWAS T-test Filtered",60
+"4","Oily fish","Cardiovascular Disease","Weighted median",0.148526238899163,0.094474945894724,-0.0366412524958664,0.333693730294192,0.115922019726329,"PheWAS PVE Filtered",49
+"5","Oily fish","Cardiovascular Disease","Weighted median",0.0806415340629084,0.12224715393682,-0.158958484865783,0.3202415529916,0.509472164612765,"Core GI",31

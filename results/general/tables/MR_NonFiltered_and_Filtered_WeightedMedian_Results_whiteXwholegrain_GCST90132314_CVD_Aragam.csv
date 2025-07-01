@@ -1,0 +1,6 @@
+"","exposure","outcome","Method","Estimate","Std Error","95% CI "," ","P-value","GI","N_snps"
+"1","White vs Whole Grain Bread","Cardiovascular Disease","Weighted median",0.017051618595644,0.0972920962496969,-0.173637386034166,0.207740623225454,0.86087367854758,"all",42
+"2","White vs Whole Grain Bread","Cardiovascular Disease","Weighted median",0.017051618595644,0.0972920962496969,-0.173637386034166,0.207740623225454,0.86087367854758,"Steiger Filtered",42
+"3","White vs Whole Grain Bread","Cardiovascular Disease","Weighted median",0.119855014972689,0.102325609465415,-0.0806994942756341,0.320409524221013,0.241474172301026,"PheWAS T-test Filtered",35
+"4","White vs Whole Grain Bread","Cardiovascular Disease","Weighted median",-0.025942370143426,0.113624513186815,-0.248642323750479,0.196757583463627,0.819400068303493,"PheWAS PVE Filtered",31
+"5","White vs Whole Grain Bread","Cardiovascular Disease","Weighted median",0.00504671869048988,0.121197960887536,-0.232496919648774,0.242590357029754,0.966785451333891,"Core GI",24

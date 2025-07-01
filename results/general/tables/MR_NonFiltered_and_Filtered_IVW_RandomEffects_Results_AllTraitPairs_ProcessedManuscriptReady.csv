@@ -1,0 +1,46 @@
+"","exposure","outcome","test","estimate","std_error","cilower","ciupper","pvalue","heter_Q","heter_pvalue","fstat"
+"1","Oily Fish","Triglycerides","All",-0.0913,0.0507,-0.191,0.00806,0.0717,1370,1.35e-237,45.1
+"2","Oily Fish","Triglycerides","Steiger",-0.0913,0.0507,-0.191,0.00806,0.0717,1370,1.35e-237,45.1
+"3","Oily Fish","Triglycerides","PheWAS-TT",-0.116,0.0316,-0.178,-0.0543,0.000236,322,2.73e-38,43.1
+"4","Oily Fish","Triglycerides","PheWAS-PVE",-0.0837,0.0795,-0.239,0.0721,0.292,1270,5.03e-236,44.1
+"5","Oily Fish","Triglycerides","Core",-0.13,0.0522,-0.233,-0.0277,0.0128,223,2.36e-31,39.8
+"6","Oily fish","Cardiovascular Disease","All",0.0262,0.0719,-0.115,0.167,0.715,221,8.89e-16,45.3
+"7","Oily fish","Cardiovascular Disease","Steiger",0.0262,0.0719,-0.115,0.167,0.715,221,8.89e-16,45.3
+"8","Oily fish","Cardiovascular Disease","PheWAS-TT",-0.062,0.083,-0.225,0.101,0.455,171,6.76e-13,43.4
+"9","Oily fish","Cardiovascular Disease","PheWAS-PVE",0.109,0.106,-0.0979,0.316,0.302,181,2.6e-17,44.2
+"10","Oily fish","Cardiovascular Disease","Core",-0.0185,0.149,-0.311,0.274,0.901,137,1.28e-15,40
+"11","Oily fish","Height","All",-0.0552,0.0739,-0.2,0.0897,0.455,1740,0,42.5
+"12","Oily fish","Height","Steiger",-0.0407,0.0513,-0.141,0.0598,0.427,766,2.38e-125,43.1
+"13","Oily fish","Height","PheWAS-TT",0.00925,0.0531,-0.0949,0.113,0.862,573,5.9e-91,40.6
+"14","Oily fish","Height","PheWAS-PVE",-0.133,0.11,-0.348,0.0831,0.228,1620,3.50000000209688e-315,40.7
+"15","Oily fish","Height","Core",-0.00774,0.0775,-0.16,0.144,0.92,354,1.22e-58,36.8
+"16","White vs Whole Grain Bread","LDL Cholesterol","All",-0.148,0.232,-0.603,0.307,0.523,13000,0,37
+"17","White vs Whole Grain Bread","LDL Cholesterol","Steiger",0.1,0.0265,0.0484,0.152,0.000153,163,3.65e-14,36.9
+"18","White vs Whole Grain Bread","LDL Cholesterol","PheWAS-TT",0.108,0.0256,0.0583,0.159,2.25e-05,98,8.95e-07,36.1
+"19","White vs Whole Grain Bread","LDL Cholesterol","PheWAS-PVE",-0.198,0.297,-0.78,0.383,0.504,13000,0,38.3
+"20","White vs Whole Grain Bread","LDL Cholesterol","Core",0.128,0.0329,0.0633,0.192,0.000102,83.8,1.77e-07,37.5
+"21","White vs Whole Grain Bread","Cardiovascular Disease","All",-0.0731,0.152,-0.37,0.224,0.629,279,4.26e-37,36.5
+"22","White vs Whole Grain Bread","Cardiovascular Disease","Steiger",-0.0731,0.152,-0.37,0.224,0.629,279,4.26e-37,36.5
+"23","White vs Whole Grain Bread","Cardiovascular Disease","PheWAS-TT",0.152,0.098,-0.0398,0.344,0.12,78.2,2.45e-05,35.4
+"24","White vs Whole Grain Bread","Cardiovascular Disease","PheWAS-PVE",-0.202,0.191,-0.577,0.173,0.291,245,1.47e-35,37.8
+"25","White vs Whole Grain Bread","Cardiovascular Disease","Core",0.0784,0.121,-0.16,0.316,0.519,56.5,0.000121,36.5
+"26","White vs Whole Grain Bread","Height","All",-0.185,0.165,-0.507,0.138,0.263,2770,0,34.7
+"27","White vs Whole Grain Bread","Height","Steiger",-0.105,0.0686,-0.24,0.0292,0.125,348,5.66e-57,34.8
+"28","White vs Whole Grain Bread","Height","PheWAS-TT",-0.156,0.0869,-0.327,0.0142,0.0725,434,3.61e-76,33.4
+"29","White vs Whole Grain Bread","Height","PheWAS-PVE",-0.208,0.219,-0.636,0.221,0.342,2710,0,36
+"30","White vs Whole Grain Bread","Height","Core",-0.119,0.107,-0.33,0.091,0.266,259,1.88e-46,35.1
+"31","Alcohol","Alanine Aminotransferase","All",-0.0217,0.00694,-0.0353,-0.00813,0.00174,488,5.06e-57,45.9
+"32","Alcohol","Alanine Aminotransferase","Steiger",-0.0217,0.00694,-0.0353,-0.00813,0.00174,488,5.06e-57,45.9
+"33","Alcohol","Alanine Aminotransferase","PheWAS-TT",-0.0252,0.0073,-0.0396,-0.0109,0.000549,312,6.1e-32,39.8
+"34","Alcohol","Alanine Aminotransferase","PheWAS-PVE",-0.0291,0.00858,-0.046,-0.0123,0.000679,427,2.76e-54,45.6
+"35","Alcohol","Alanine Aminotransferase","Core",-0.0326,0.00922,-0.0507,-0.0145,0.000411,263,2.82e-30,40.5
+"36","Alcohol","Liver Cirrhosis","All",0.297,0.141,0.0214,0.573,0.0347,125,0.000135,42.7
+"37","Alcohol","Liver Cirrhosis","Steiger",0.297,0.141,0.0214,0.573,0.0347,125,0.000135,42.7
+"38","Alcohol","Liver Cirrhosis","PheWAS-TT",0.136,0.146,-0.149,0.422,0.349,83.1,0.0315,37.5
+"39","Alcohol","Liver Cirrhosis","PheWAS-PVE",0.227,0.166,-0.0984,0.552,0.172,98.4,0.000398,41.9
+"40","Alcohol","Liver Cirrhosis","Core",0.178,0.179,-0.172,0.529,0.319,69.4,0.0112,38.6
+"41","Alcohol","Height","All",0.0735,0.067,-0.0578,0.205,0.273,1610,3.23e-294,41.7
+"42","Alcohol","Height","Steiger",0.0726,0.0529,-0.0311,0.176,0.17,941,3.27e-157,41.6
+"43","Alcohol","Height","PheWAS-TT",0.0418,0.0548,-0.0657,0.149,0.446,532,2.96e-82,34.7
+"44","Alcohol","Height","PheWAS-PVE",0.115,0.0849,-0.0519,0.281,0.177,1470,9.18999999999999e-276,40.3
+"45","Alcohol","Height","Core",0.0242,0.0716,-0.116,0.165,0.735,471,9.72e-78,35.2

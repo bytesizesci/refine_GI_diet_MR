@@ -1,0 +1,2 @@
+"","test","model","robust","penalized","estimate","std_error","cilower","ciupper","pvalue","heter_Q","heter_pvalue","fstat"
+"1","mr_ttest_sensitivity_ivw_randomeffects","random",FALSE,FALSE,0.00924837929667577,0.053135271056684,-0.0948948382831984,0.11339159687655,0.861823425865163,572.704804397809,5.9044200067289e-91,40.5651162141856

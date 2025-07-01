@@ -1,0 +1,6 @@
+"","exposure","outcome","Method","Estimate","Std Error","95% CI "," ","P-value","GI","N_snps"
+"1","White vs Whole Grain Bread","LDL Cholesterol","Weighted median",0.122641721510929,0.0230753926739622,0.0774147829408437,0.167868660081014,1.06758667196105e-07,"all",51
+"2","White vs Whole Grain Bread","LDL Cholesterol","Weighted median",0.124582089256287,0.0227497514682031,0.0799933957213722,0.169170782791203,4.34567279211697e-08,"Steiger Filtered",50
+"3","White vs Whole Grain Bread","LDL Cholesterol","Weighted median",0.132853186210935,0.0252370503040045,0.0833894765390606,0.18231689588281,1.40791817179653e-07,"PheWAS T-test Filtered",41
+"4","White vs Whole Grain Bread","LDL Cholesterol","Weighted median",0.135906626752986,0.0263103622027137,0.0843392644154635,0.187473989090509,2.39775061699664e-07,"PheWAS PVE Filtered",39
+"5","White vs Whole Grain Bread","LDL Cholesterol","Weighted median",0.144887855943354,0.0298338940578077,0.0864144980714678,0.203361213815241,1.19487889829211e-06,"Core GI",29
