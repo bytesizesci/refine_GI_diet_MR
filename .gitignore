@@ -1,0 +1,46 @@
+# === OS and editor files ===
+.DS_Store
+*.swp
+*.swo
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.ipynb_checkpoints/
+
+# === R ===
+.Rhistory
+.RData
+.Rproj.user/
+
+# === Jupyter Notebooks ===
+.ipynb_checkpoints/
+
+# === Logs and output ===
+config/
+*.log
+slurm-*.out
+*.out
+*.err
+
+# === Data ===
+raw_data/
+interim_data/
+*.csv.gz
+*.bgz
+*.bgen
+*.vcf
+*.vcf.gz
+*.pgen
+*.psam
+*.pvar
+
+# === Environment files ===
+.venv/
+.env
+
+# === Misc ===
+*.tmp
+*.bak
+*.old
