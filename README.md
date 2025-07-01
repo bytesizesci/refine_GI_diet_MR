@@ -6,12 +6,12 @@ Read our preprint: [https://doi.org/10.1101/2025.06.26.25330002](https://doi.org
 
 ## 🗂️ Project Structure
 
-project-root/
-├── scripts/ # Analysis and pipeline scripts
-├── results/ # Final figures and tables
-├── demo/ # demo - coming soon
-├── .gitignore
-└── README.md 
+project-root/ <br>
+├── scripts/ # Analysis and pipeline scripts <br>
+├── results/ # Final figures and tables <br>
+├── demo/ # demo - coming soon <br>
+├── .gitignore <br>
+└── README.md <br>
 
 ## 🧬 Data availability
 
