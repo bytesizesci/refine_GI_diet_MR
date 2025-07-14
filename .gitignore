@@ -28,7 +28,6 @@ slurm-*.out
 raw_data/
 interim_data/
 *.csv.gz
-*.bgz
 *.bgen
 *.vcf
 *.vcf.gz
