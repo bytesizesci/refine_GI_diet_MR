@@ -131,3 +131,6 @@ mvmr_dat <- reduce(dfs, left_join, by = "chr_pos") %>%
   na.omit()
 
 cat("Final dimensions:", dim(mvmr_dat), "\n")
+
+# Save
+saveRDS(mvmr_dat, paste0(output_dir, "/MVMR_GI_input_",diet_trait,".rds"))
