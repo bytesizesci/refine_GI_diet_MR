@@ -15,33 +15,30 @@
 # to run clumping again to make sure they are all independent.
 
 # ===================== USER CONFIGURATION =====================
-diet_outcome="alcohol_ALT"
-
-file="~/working_example/data/GI_temp/${diet_outcome}/all_clumped_snps_${diet_outcome}_MVMR_GI.txt"
-
 # Define this folder (doesn't change)
-GI_clumped="GI_clumped"
+GI_clumped="GI_temp_clumped"
 
-DATA_DIR= "~/working_example/data" 
+# Define other paths
+DATA_DIR= ~/working_example/data
 REF_DIR="${DATA_DIR}/reference_1KGP3_HG19"
-OUTDIR="${DATA_DIR}/plink_clumped"
-DIET_OUTCOME="alcohol_ALT" #diet_outcome
-trait_outdir="${DATA_DIR}/${DIET_OUTCOME}/${GI_clumped}"
+OUT_DIR= ~/working_example/results/plink_clumped
+DIET_OUTCOME="alcohol_ALT"
+GI_TEMP_DIR="${OUT_DIR}/${DIET_OUTCOME}/${GI_clumped}"
+
+# Define file
+file="~/working_example/results/GI_temp/${DIET_OUTCOME}/all_clumped_snps_${DIET_OUTCOME}_MVMR_GI.txt"
 
 # Load plink
 # Customized to Alpine HPC
 # Modify for your system
 module load plink2/2.00a2.3
-
 # ==============================================================
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Step 1: Run plink on the temporary GI
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 # Make a folder for the clumped results if it doesn't exist
-if [ ! -d "${DATA_DIR}/${DIET_OUTCOME}/${GI_clumped}" ]; then
-  mkdir ${DATA_DIR}/${DIET_OUTCOME}/${GI_clumped}
-fi
+mkdir -p "${GI_TEMP_DIR}" 
 
 # Use plink v1.9 for this; just type plink instead of plink2
 for chr in {1..22}; do
@@ -53,5 +50,5 @@ for chr in {1..22}; do
     --clump-p1 5e-8 \
     --clump-r2 0.01 \
     --clump-kb 10000 \
-    --out "${trait_outdir}/GI_clumped_results_chr${chr}.tsv"
+    --out "${GI_TEMP_DIR}/GI_clumped_results_chr${chr}.tsv"
 done

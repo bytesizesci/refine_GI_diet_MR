@@ -21,7 +21,16 @@ library(RColorBrewer)
 setwd("~/working_example")
 
 # Set table directory for saving
-table_dir <- "~/working_example/tables"
+table_dir <- "~/working_example/results/tables"
+
+# Check if the nested directory exists
+if (!dir.exists(table_dir)) {
+  # If it doesn't exist, create it recursively
+  dir.create(table_dir, recursive = TRUE)
+  print(paste0("Nested directory '", table_dir, "' created successfully."))
+} else {
+  print(paste0("Nested directory '", table_dir, "' already exists."))
+}
 
 # Define number of clusters (determined in 03_rg_cluster.R)
 k=5

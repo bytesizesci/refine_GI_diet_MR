@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=07_plink_clump_GI
+#SBATCH --job-name=08_plink_clump_GI_step2
 #SBATCH --output=/your/path/to/logs/ldsc_rg_%j.out      # CHANGE: set to your own logs directory
 #SBATCH --error=/your/path/to/logs/ldsc_rg_%j.err       # CHANGE: set to your own logs directory
 #SBATCH --partition=your_partition_name                 # CHANGE: partition name for your system
@@ -17,44 +17,44 @@
 # to see if that solves the problem
 
 # ===================== USER CONFIGURATION =====================
-diet_outcome="alcohol_ALT"
-
-file="~/working_example/data/GI_temp/${diet_outcome}/all_clumped_snps_${diet_outcome}_MVMR_GI.txt"
-
 # Define this folder (doesn't change)
 GI_clumped="GI_clumped"
+GI_temp_clumped="GI_temp_clumped"
 
-DATA_DIR= "~/working_example/data" 
+# Define diet outcome variable
+DIET_OUTCOME="alcohol_ALT" 
+
+# Define other paths
+DATA_DIR= ~/working_example/data
 REF_DIR="${DATA_DIR}/reference_1KGP3_HG19"
-OUTDIR="${DATA_DIR}/plink_clumped"
-DIET_OUTCOME="alcohol_ALT" #diet_outcome
-trait_outdir="${DATA_DIR}/${DIET_OUTCOME}/${GI_clumped}"
+OUT_DIR= ~/working_example/results/plink_clumped
+GI_TEMP_DIR="${OUT_DIR}/${DIET_OUTCOME}/${GI_temp_clumped}" #where the log files with the missing SNP IDs are
+RES_DIR="${OUT_DIR}/${DIET_OUTCOME}/${GI_clumped}" # where the new clumping results will go
 
-# Define where the log files with the missing SNP IDs are
-logdir="${DATA_DIR}/${DIET_OUTCOME}/${GI_clumped}"
+# Define input file
+file="~/working_example/results/GI_temp/${DIET_OUTCOME}/all_clumped_snps_${DIET_OUTCOME}_MVMR_GI.txt"
 
 # Load plink
 # Customized to Alpine HPC
 # Modify for your system
 module load plink2/2.00a2.3
-
 # ==============================================================
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Step 1: Create flipped allele .txt and combine with original
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 # This code expands to all .log files in the directory
 # strips directory and log suffix to get the base name
 # writes the extracted SNPs to a missing_snps.txt file in the same directory
-for logfile in "$logdir"/*.log; do
+for logfile in "$GI_TEMP_DIR"/*.log; do
   base=$(basename "$logfile" .log)
-  outname="$logdir/${base}.missing_snps.txt"
+  outname="$GI_TEMP_DIR/${base}.missing_snps.txt"
   grep "Warning:" "$logfile" | awk -F"'" '{print $2}' > "$outname"
 done
 
 # Filter the missing SNPs from the original file (that has SNP and P value info)
 # First, combine missing SNPs into 1 file
-cat "$logdir"/*.missing_snps.txt | sort -u > $out_path/combined_missing_snps.txt
+cat "$GI_TEMP_DIR"/*.missing_snps.txt | sort -u > $GI_TEMP_DIR/combined_missing_snps.txt
 
 awk '
   NR==FNR { flip[$1]; next } 
@@ -66,7 +66,7 @@ awk '
     next
   }
   { print }
-' $out_path/combined_missing_snps.txt $file > $out_path/flipped_summary_file.txt
+' $GI_TEMP_DIR/combined_missing_snps.txt $file > $GI_TEMP_DIR/flipped_summary_file.txt
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Step 2: Rerun plink and write over original plink files
@@ -77,13 +77,13 @@ awk '
 for chr in {1..22}; do
   plink \
     --bfile "${REF_DIR}/1KGP3_HG19_files_processed_EUR_Jenkai_chr${chr}_chrbpID" \
-    --clump "$out_path/flipped_summary_file.txt" \
+    --clump "$GI_TEMP_DIR/flipped_summary_file.txt" \
     --clump-snp-field SNP \
     --clump-field P \
     --clump-p1 5e-8 \
     --clump-r2 0.01 \
     --clump-kb 10000 \
-    --out "${trait_outdir}/GI_clumped_results_chr${chr}.tsv"
+    --out "${RES_DIR}/GI_flipped_clumped_results_chr${chr}.tsv"
 done
 
 

@@ -16,16 +16,20 @@ diet_trait <- paste0(EXP_pheno, "_", OUT_pheno)
 
 # Define PheWAS traits
 # Identified in 04_snp_overlap.R
-phewas_traits <- c("20015_irnt", "23098_irnt", "23106_irnt", "30080_irnt", "30270_irnt")
+phewas_traits <- c("20015_irnt",
+                   "23098_irnt",
+                   "23106_irnt",
+                   "30080_irnt",
+                   "30270_irnt")
 
 # Set clumped file directory
-clumped_dir <- paste0("~/working_example/data/plink_clumped/",diet_trait)
+clumped_dir <- paste0("~/working_example/results/plink_clumped/",diet_trait)
 
 # Set output file directory
-output_dir <- paste0("~/working_example/data/GI_temp/", diet_trait)
+output_dir <- paste0("~/working_example/results/GI_temp/", diet_trait) #this is created below
 
 # Set diet file directory
-data_dir <- paste0("~/working_example/data/")
+data_dir <- paste0("~/working_example/data")
 
 # ==============================================================
 

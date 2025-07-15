@@ -16,10 +16,10 @@
 
 # ===================== USER CONFIGURATION =====================
 # Define key directories
-DATA_DIR= "~/working_example/data" #"/pl/active/colelab/users/kjames/refinedMR/interim_data"
+DATA_DIR= ~/working_example/data #"/pl/active/colelab/users/kjames/refinedMR/interim_data"
 REF_DIR="${DATA_DIR}/reference_1KGP3_HG19"
-GWAS_DIR="${DATA_DIR}/GWAS_NL"
-OUTDIR="${DATA_DIR}/plink_clumped"
+GWAS_DIR="${DATA_DIR}/GWAS_NL" #this is created below
+OUT_DIR= ~/working_example/results/plink_clumped #this is created below
 DIET_OUTCOME="alcohol_ALT" #diet_outcome
 
 # List of traits (one per line)
@@ -41,8 +41,9 @@ module load plink2/2.00a2.3
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Step 1: Get the GWAS NL files
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Create it if it doesn't exist
+# Create folders if they doesn't exist
 mkdir -p "${GWAS_DIR}"
+mkdir -p "${OUT_DIR}"
 
 # See https://www.nealelab.is/uk-biobank for source files
 BASE_URL="https://broad-ukb-sumstats-us-east-1.s3.amazonaws.com/round2/additive-tsvs"
@@ -64,7 +65,7 @@ for file in ~/working_example/data/reference_1KGP3_HG19/*.gz; do
 done
 
 # Unzip them, remove the .bgz file after unzipping it
-for file in ~working_example/data/GWAS_NL/*.bgz; do
+for file in ~/working_example/data/GWAS_NL/*.bgz; do
   [ -e "$file" ] || continue  # Skip loop if no .bgz files found
   zcat "$file" > "${file%.bgz}" && rm "$file"
 done
@@ -75,7 +76,7 @@ done
 for trait in "${TRAITS[@]}"; do
   gwas_file="${GWAS_DIR}/${trait}.gwas.imputed_v3.both_sexes.tsv"
 
-  trait_outdir="${OUTDIR}/${DIET_OUTCOME}/${trait}"
+  trait_outdir="${OUT_DIR}/${DIET_OUTCOME}/${trait}"
   mkdir -p "${trait_outdir}"
 
   for chr in {1..22}; do
