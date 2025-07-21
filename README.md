@@ -7,9 +7,12 @@ Read our preprint: [https://doi.org/10.1101/2025.06.26.25330002](https://doi.org
 ## 🗂️ Project Structure
 
 project-root/ <br>
-├── scripts/ # Analysis and pipeline scripts <br>
-├── results/ # Final figures and tables <br>
-├── demo/ # demo - coming soon <br>
+├── scripts_archive/ # Archive of analysis and pipeline scripts <br>
+├── results_archive/ # Archive of figures and tables <br>
+├── working_example/ # under development <br>
+|   ├── data/ #contains data to run the working_example
+|   |   ├── reference_1KGP3_HG19/ #contains reference data 
+|   └── scripts/ #contains the scripts to run the working_example
 ├── .gitignore <br>
 └── README.md <br>
 
