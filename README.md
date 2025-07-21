@@ -16,6 +16,7 @@ project-root/
 │   └── scripts/                  # Contains the scripts to run the working_example
 ├── .gitignore
 └── README.md
+```
 
 ## 🧬 Data availability
 
