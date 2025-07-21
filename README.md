@@ -1,6 +1,7 @@
 # Dietary Intake Mendelian Randomization
 
-This project corresponds to our manuscript, *Dietary Intake Mendelian Randomization: Assessment and Development of Methods for Instrument Selection and Robust Inference.*
+This project corresponds to our manuscript, *Dietary Intake Mendelian Randomization: Assessment and Development of Methods for Instrument Selection and Robust Inference*, written by 
+Kristen J. Sutton, Julie Gervis, Moomal Jatoi, Liang-Dar Hwang, Audrey Hendricks, Debashis Ghosh, Kenneth Westerman, and Joanne B. Cole.
 
 Read our preprint: [https://doi.org/10.1101/2025.06.26.25330002](https://doi.org/10.1101/2025.06.26.25330002 "Awesome dietary intake Mendelian randomization paper") 
 
