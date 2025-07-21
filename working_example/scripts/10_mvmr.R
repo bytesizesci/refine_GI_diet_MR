@@ -13,7 +13,7 @@
 library(MVMR)
 library(dplyr)
 library(tibble)
-# ===================== USER CONFIGURATION =====================
+# ===================== USER CONFIGURATION p1 =====================
 # Set working direcotry
 #setwd("/pl/active/colelab/users/kjames/refinedMR/")
 setwd("~/working_example")
@@ -97,6 +97,9 @@ str(wide_matrix_sub)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Step 2: Format the data for MVMR 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ===================== USER CONFIGURATION p2 =====================
+# Adjust the MVMR columns to match your data!
+
 # Run MVMR
 # When creating the mvmr object, make sure the order matches the order in wide_matrix_sub
 F.data <- format_mvmr(BXGs = cbind(mvmr_dat$beta.23098_irnt,
@@ -117,6 +120,7 @@ F.data <- format_mvmr(BXGs = cbind(mvmr_dat$beta.23098_irnt,
 head(F.data)
 str(mvmr_dat)
 
+# Adjust the MVMR se columns to match your data!
 # Make se matrix
 seBXGs <- matrix(cbind(mvmr_dat$se.23098_irnt,
                        mvmr_dat$se.20015_irnt,
@@ -133,6 +137,7 @@ str(gencov)
 
 # Need to turn gencov into a list with matrices. This will make the matrix multiplication work.
 gencov <- lapply(gencov, as.matrix)
+# ==============================================================
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Step 1: MVMR & Sensitivity 
@@ -160,16 +165,22 @@ write.csv(res, paste0("~/working_example/results/tables/MVMR_",diet_trait,"_resu
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Get 95% CI - alcohol
 low_95CI <- res[6,1] - (res[6,2]*1.96) #alcohol is the 6th exposure
+cat("Low 95% confidence interval:", low_95CI)
+
 high_95CI <- res[6,1] + (res[6,2]*1.96)
+cat("High 95% confidence interval:", high_95CI)
 
 # weight
-exp1_low_95CI <- res[1,1] - (res[1,2]*1.96) #alcohol is the 6th exposure
+exp1_low_95CI <- res[1,1] - (res[1,2]*1.96) 
+cat("Low 95% confidence interval:", exp1_low_95CI)
+
 exp1_high_95CI <- res[1,1] + (res[1,2]*1.96)
-exp1_low_95CI
-exp1_high_95CI
+cat("High 95% confidence interval:", exp1_high_95CI)
 
 # sitting height
-exp2_low_95CI <- res[2,1] - (res[2,2]*1.96) #alcohol is the 6th exposure
+exp2_low_95CI <- res[2,1] - (res[2,2]*1.96) 
+cat("Low 95% confidence interval:", exp2_low_95CI)
+
 exp2_high_95CI <- res[2,1] + (res[2,2]*1.96)
-exp2_low_95CI
-exp2_high_95CI
+cat("High 95% confidence interval:", exp2_high_95CI)
+
