@@ -6,15 +6,16 @@ Read our preprint: [https://doi.org/10.1101/2025.06.26.25330002](https://doi.org
 
 ## 🗂️ Project Structure
 
-project-root/ <br>
-├── scripts_archive/ # Archive of analysis and pipeline scripts <br>
-├── results_archive/ # Archive of figures and tables <br>
-├── working_example/ # under development <br>
-|   ├── data/ #contains data to run the working_example
-|   |   ├── reference_1KGP3_HG19/ #contains reference data 
-|   └── scripts/ #contains the scripts to run the working_example
-├── .gitignore <br>
-└── README.md <br>
+```text
+project-root/
+├── scripts_archive/              # Archive of analysis and pipeline scripts
+├── results_archive/              # Archive of figures and tables
+├── working_example/              # Under development
+│   ├── data/                     # Contains data to run the working_example
+│   │   ├── reference_1KGP3_HG19/ # Contains reference data
+│   └── scripts/                  # Contains the scripts to run the working_example
+├── .gitignore
+└── README.md
 
 ## 🧬 Data availability
 
