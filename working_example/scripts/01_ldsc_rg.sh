@@ -18,22 +18,22 @@
 # Step 1: Define paths 
 
 # Input path (update as needed)
-in_dir=/your/path/to/ldsc_input #/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_LDSC_input
+in_dir="/working_example/data" #/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_LDSC_input
 
 # Contains ldsc file paths, one per line
-file_list="$in_dir/example_file_list.txt" #$in_dir/PheWAS_Ttest_ALLFILES_for_gcor.txt" 
+# Note, depending on where your ldsc files are saved, may have to modify the content in LDSC_filepaths to correctly reflect the location
+file_list="$in_dir/LDSC_filepaths.txt" #$in_dir/PheWAS_Ttest_ALLFILES_for_gcor.txt" 
 
 # Directory to save results
-output_dir="/your/path/to/ldsc_results" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_ldsc_results/all_gcor_files" 
+# This is created by this script
+output_dir="/working_example/ldsc_results/rg" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_ldsc_results/all_gcor_files" 
 
 # Reference directory for LDSC
-ref_dir="/your/path/to/ldsc_reference" #"/pl/active/colelab/common/eur_w_ld_chr/" 
-
-software_dir=/your/path/to/lmod-files #/pl/active/colelab/common/software/lmod-files
+ref_dir="/working_example/data/reference_1KGP3_HG19" #"/pl/active/colelab/common/eur_w_ld_chr/" 
 # ==============================================================
 
 # Step 2: Load LDSC
-# Customized to Alpine HPC
+# Customized to Alpine HPC, uncomment for Alpine
 #module use --append /pl/active/colelab/common/software/lmod-files
 # Modify for your system 
 module load ldsc

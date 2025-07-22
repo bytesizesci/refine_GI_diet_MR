@@ -19,14 +19,14 @@ setwd("~/working_example")
 
 # Set plot directory for saving
 #res_dir <- "/pl/active/colelab/users/kjames/refinedMR/interim_data/MVMR/oilyfish_tg/plots"
-plot_dir <- "~/working_example/plots"
+plot_dir <- "~/working_example/results/plots"
 
 # Set table directory for saving
-table_dir <- "~/working_example/tables"
+table_dir <- "~/working_example/results/tables"
 
 # File with gcors from traits identified in PheWAS-Ttest method
 #df <- read.table("/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/processed_results/gcor_PheWASttest_results_all.txt")
-df <- read.table("~/working_example/data/gcor_PheWASttest_results_all.txt")
+df <- read.table("~/working_example/ldsc_results/processed_results/gcor_PheWASttest_results_all.txt")
 
 # Replace file names with trait descriptions
 #key <- read.csv("/pl/active/colelab/common/published_gwas/Neale_UKB_GWAS_round2/metadata/UKBB GWAS Imputed v3 - File Manifest Release 20180731 - Description Lookup.csv",header = FALSE)
@@ -38,10 +38,7 @@ OUT_pheno <- "ALT"
 
 # File with traits specific to an MR analysis
 #traits <- read.csv("interim_data/ldsc/PheWAS_Ttest_LDSC_input/alcohol_GCST90013405_ALT_Pazoki_descending_TTest_filenames.txt", header = FALSE)
-traits <- read.csv("~/working_example/data/alcohol_GCST90013405_ALT_Pazoki_descending_TTest_filenames.txt", header = FALSE)
-# Get unique traits
-traitsu <- unique(traits)
-traitsu$V1 <- gsub("/pl/active/colelab/common/published_gwas/Neale_UKB_GWAS_round2/Both_sexes/LDSC/", "", traitsu$V1) #KJ EDIT THIS WHEN YOU PREP WORKING EXAMPLE DATA
+traitsu <- read.csv("~/working_example/data/LDSC_filepaths.txt", header = FALSE)
 
 # NOTE - User must define k clusters below
 # ==============================================================

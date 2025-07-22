@@ -41,7 +41,7 @@ OUT_pheno <- "ALT"
 
 # Load the cluster results 
 #clst <- read.csv("interim_data/MVMR/alcohol_ALT/hclust_complete_cut5.csv")
-clst <- read.csv("~/working_example/data")
+clst <- read.csv(paste0(table_dir, "hclust_complete_cut", k, ".csv"))
 clst$trait_id <- gsub("ldsc", "gwas", clst$trait_id)
 clst$trait_id <- gsub(".bgz", "", clst$trait_id)
 
@@ -89,7 +89,7 @@ top_traits2 <- merge(top_traits, key, by.x = "trait_id_num", by.y = "V1")
 # We still have ties in the top_traits2 object. Use heritability to distinguish 
 # which traits to pick when there are ties.
 # File with gcors from traits identified in PheWAS-Ttest method
-gcor <- read.table("/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/processed_results/gcor_PheWASttest_results_all.txt")
+gcor <- read.table("/working_example/ldsc_results/processed_results/gcor_PheWASttest_results_all.txt") #/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/processed_results/gcor_PheWASttest_results_all.txt
 
 # Header
 gcor_header <- c("p1", "p2", "rg", "se", "z", "p", "h2_obs", "h2_obs_se", "h2_int", "h2_int_se", "gcov_int", "gcov_int_se")
