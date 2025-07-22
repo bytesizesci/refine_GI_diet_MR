@@ -18,6 +18,7 @@ project-root/
 ├── .gitignore
 └── README.md
 ```
+Additional directories are created as a result of running this pipeline. 
 
 ## :eyeglasses: Prerequisites 
 
