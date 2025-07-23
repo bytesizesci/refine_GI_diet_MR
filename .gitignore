@@ -34,6 +34,7 @@ interim_data/
 *.pgen
 *.psam
 *.pvar
+*.tsv
 
 # === Environment files ===
 .venv/
