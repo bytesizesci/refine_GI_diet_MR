@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=08_plink_clump_GI_step2
-#SBATCH --output=/your/path/to/logs/ldsc_rg_%j.out      # CHANGE: set to your own logs directory
-#SBATCH --error=/your/path/to/logs/ldsc_rg_%j.err       # CHANGE: set to your own logs directory
+#SBATCH --output=config/plink_clump_GI2_%j.out      
+#SBATCH --error=config/plink_clump_GI2_%j.err       
 #SBATCH --partition=your_partition_name                 # CHANGE: partition name for your system
 #SBATCH --nodes=1
 #SBATCH --qos=normal                                    # REMOVE or modify if your system doesn't use QoS
@@ -25,14 +25,14 @@ GI_temp_clumped="GI_temp_clumped"
 DIET_OUTCOME="alcohol_ALT" 
 
 # Define other paths
-DATA_DIR= ~/working_example/data
+DATA_DIR= working_example/data
 REF_DIR="${DATA_DIR}/reference_1KGP3_HG19"
-OUT_DIR= ~/working_example/results/plink_clumped
+OUT_DIR= working_example/results/plink_clumped
 GI_TEMP_DIR="${OUT_DIR}/${DIET_OUTCOME}/${GI_temp_clumped}" #where the log files with the missing SNP IDs are
 RES_DIR="${OUT_DIR}/${DIET_OUTCOME}/${GI_clumped}" # where the new clumping results will go
 
 # Define input file
-file="~/working_example/results/GI_temp/${DIET_OUTCOME}/all_clumped_snps_${DIET_OUTCOME}_MVMR_GI.txt"
+file="working_example/results/GI_temp/${DIET_OUTCOME}/all_clumped_snps_${DIET_OUTCOME}_MVMR_GI.txt"
 
 # Load plink
 # Customized to Alpine HPC

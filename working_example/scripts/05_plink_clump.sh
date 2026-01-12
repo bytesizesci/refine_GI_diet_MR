@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=05_plink_clump
-#SBATCH --output=/your/path/to/logs/ldsc_rg_%j.out      # CHANGE: set to your own logs directory
-#SBATCH --error=/your/path/to/logs/ldsc_rg_%j.err       # CHANGE: set to your own logs directory
+#SBATCH --output=config/plink_clump_%j.out      
+#SBATCH --error=config/plink_clump_%j.err       
 #SBATCH --partition=your_partition_name                 # CHANGE: partition name for your system
 #SBATCH --nodes=1
 #SBATCH --qos=normal                                    # REMOVE or modify if your system doesn't use QoS
@@ -16,10 +16,10 @@
 
 # ===================== USER CONFIGURATION =====================
 # Define key directories
-DATA_DIR= ~/working_example/data #"/pl/active/colelab/users/kjames/refinedMR/interim_data"
+DATA_DIR= working_example/data #"/pl/active/colelab/users/kjames/refinedMR/interim_data"
 REF_DIR="${DATA_DIR}/reference_1KGP3_HG19"
 GWAS_DIR="${DATA_DIR}/GWAS_NL" #this is created below
-OUT_DIR= ~/working_example/results/plink_clumped #this is created below
+OUT_DIR= working_example/results/plink_clumped #this is created below
 DIET_OUTCOME="alcohol_ALT" #diet_outcome
 
 # List of traits (one per line)

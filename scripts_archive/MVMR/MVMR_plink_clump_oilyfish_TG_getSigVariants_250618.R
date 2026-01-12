@@ -303,6 +303,173 @@ exp2_high_95CI
 # Save
 write.csv(res, paste0("interim_data/MVMR/oilyfish_tg/",diet_trait2,"_MVMR_IVW.txt"))
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Harmonize outcome with one exposure
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+source("working_example/scripts/harmonize_alleles.R")
+# Note, this switches the outcome to match the exposure
+
+# This data is missing but needed for harmonization. Generate it
+mvmr_dat$phewas_ref <- stringr::str_split_fixed(mvmr_dat$variant.x, ":", 4)[,3]
+mvmr_dat$phewas_alt <- stringr::str_split_fixed(mvmr_dat$variant.x, ":", 4)[,4]
+
+tmp <- mvmr_dat %>% select(variant.x, phewas_alt, effect_allele.exposure.oilyfish, beta.exposure.oilyfish, effect_allele.outcome.TG, beta.outcome.TG)
+
+# Harmonize alcohol to the other exposures
+mvmr_dat_harm <- harmonize_alleles(
+  gi = mvmr_dat,
+  effect_allele_exposure = "phewas_alt",
+  effect_allele_outcome = "effect_allele.exposure.oilyfish",
+  other_allele_exposure = "phewas_ref",
+  other_allele_outcome = "other_allele.exposure.oilyfish",
+  beta_outcome = "beta.exposure.oilyfish",
+  eaf_outcome = "eaf.exposure.oilyfish",
+  oaf_outcome = "oaf.exposure.oilyfish",
+  chr_outcome = "chr.exposure.oilyfish",
+  pos_outcome = "pos.exposure.oilyfish"
+)
+
+tmp1 <- mvmr_dat_harm %>% select(variant.x, phewas_alt, effect_allele.exposure.oilyfish, beta.exposure.oilyfish, effect_allele.outcome.TG, beta.outcome.TG)
+
+# Now try outcome and an exposure
+mvmr_dat_harm2 <- harmonize_alleles(
+  gi = mvmr_dat_harm,
+  effect_allele_exposure = "phewas_alt",
+  effect_allele_outcome = "effect_allele.outcome.TG",
+  other_allele_exposure = "phewas_ref",
+  other_allele_outcome = "other_allele.outcome.TG",
+  beta_outcome = "beta.outcome.TG",
+  eaf_outcome = "eaf.outcome.TG",
+  oaf_outcome = "oaf.outcome.TG",
+  chr_outcome = "chr.outcome.TG",
+  pos_outcome = "pos.outcome.TG"
+)
+
+tmp2 <- mvmr_dat_harm2 %>% select(variant.x, phewas_alt, effect_allele.exposure.oilyfish, beta.exposure.oilyfish, effect_allele.outcome.TG, beta.outcome.TG)
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Genetic Correlations: Generate the g-correlation matrix
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# Identified in 04_snp_overlap.R
+exposure_traits <- c("30110_irnt",
+                     "30000_irnt",
+                     "30050_irnt")
+                     #"1329") # oily fish
+
+df <- read.table("/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/processed_results/gcor_PheWASttest_results_all.txt")
+diet <- read.table("/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/processed_results/diet_gcor_results.txt")
+
+# Header
+gcor_header <- c("p1", "p2", "rg", "se", "z", "p", "h2_obs", "h2_obs_se", "h2_int", "h2_int_se", "gcov_int", "gcov_int_se")
+
+# Assign header to df
+colnames(df) <- gcor_header
+colnames(diet) <- gcor_header
+
+# rbind df and diet
+#df <- rbind(df, diet)
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# Run this chunk on diet
+# ~~~~~~~~~~~~~~~~~~~~~~~~~
+# Identified in 04_snp_overlap.R
+exposure_traits2 <- c("30110_irnt",
+                     "30000_irnt",
+                     "30050_irnt",
+                     "1329") # oily fish
+
+# Make sure p1-p2 and p2-p1 exists (dcast has issues if not)
+diet_full <- diet %>%
+  mutate(p1_alt = p2, p2_alt = p1) %>%
+  rename(rg_alt = rg) %>%
+  select(p1 = p1_alt, p2 = p2_alt, rg = rg_alt) %>%
+  bind_rows(diet)  # combine original and flipped
+
+# Now cast
+diet_wide_matrix <- reshape2::dcast(diet_full, p1 ~ p2, value.var = "rg")
+
+# Set rownames
+rownames(diet_wide_matrix) <- diet_wide_matrix[,"p1"]
+diet_wide_matrix <- diet_wide_matrix %>% select(-p1)
+str(diet_wide_matrix)
+
+# Add diagonal
+diag(diet_wide_matrix) <- 1
+
+# Add ".ldsc.imputed_v3.both_sexes.tsv.bgz" to exposure_traits
+phewas_traits_long <- paste0(exposure_traits2, ".ldsc.imputed_v3.both_sexes.tsv.bgz")
+
+# Now only keep rows and columns that are in the trait list
+# Filter columns
+diet_wide_matrix_sub <- diet_wide_matrix %>%
+  select(all_of(phewas_traits_long)) 
+
+# Filter rows; have to turn the df into a tibble
+diet_wide_matrix_sub <- diet_wide_matrix_sub %>%
+  tibble::rownames_to_column(var = "trait")
+diet_wide_matrix_sub <- filter(diet_wide_matrix_sub, trait %in% phewas_traits_long)
+
+# Sort
+desired_row_order <- colnames(diet_wide_matrix_sub)[-1]
+diet_wide_matrix_sub <- diet_wide_matrix_sub %>%
+  mutate(trait = factor(trait, levels = desired_row_order)) %>%
+  arrange(trait)
+
+# Turn back into a square matrix
+diet_wide_matrix_sub <- diet_wide_matrix_sub %>%
+  tibble::column_to_rownames("trait") %>%
+  as.matrix()
+
+# Check
+str(diet_wide_matrix_sub)
+
+# ~~~~~~~~~~ Run MVMR with genetic correlation data
+# Run MVMR
+library(MVMR)
+F.data <- format_mvmr(BXGs = cbind(mvmr_dat_harm2$beta.30110_irnt,
+                                   mvmr_dat_harm2$beta.30000_irnt,
+                                   mvmr_dat_harm2$beta.30050_irnt,
+                                   mvmr_dat_harm2$beta.exposure.oilyfish), #beta of exposures
+                      BYG = mvmr_dat_harm2$beta.outcome.TG, # beta of outcome
+                      seBXGs = cbind(mvmr_dat_harm2$se.30110_irnt,
+                                     mvmr_dat_harm2$se.30000_irnt,
+                                     mvmr_dat_harm2$se.30050_irnt,
+                                     mvmr_dat_harm2$se.exposure.oilyfish), # se of exposures
+                      seBYG = mvmr_dat_harm2$se.outcome.TG, # se of outcome
+                      RSID = mvmr_dat_harm2$variant.x)
+head(F.data)
+str(mvmr_dat_harm2)
+seBXGs <- matrix(cbind(mvmr_dat_harm2$se.30110_irnt,
+                       mvmr_dat_harm2$se.30000_irnt,
+                       mvmr_dat_harm2$se.30050_irnt,
+                       mvmr_dat_harm2$se.exposure.oilyfish),
+                 byrow = TRUE,
+                 ncol=4)
+gencov <- phenocov_mvmr(diet_wide_matrix_sub, seBXGs)
+str(gencov)
+
+# Need to turn gencov into a list with matrices. This will make the matrix multiplication work.
+gencov <- lapply(gencov, as.matrix)
+
+# Test for weak instruments
+sres <- strength_mvmr(r_input = F.data, gencov = gencov) 
+
+# Save res
+write.csv(sres, paste0("results_archive/MVMR/strength_mvmr_",diet_trait,"_f_results_geneticCorrelations_harm.txt"))
+
+# Pleiotropy
+pres <- pleiotropy_mvmr(r_input = F.data, gencov = gencov) 
+pres
+# VERY heterogeneous... Q=10116, P=0
+# Save res
+write.csv(pres, paste0("results_archive/MVMR/strength_mvmr_",diet_trait,"_p_results_geneticCorrelations_harm.txt"))
+
+# Estimate causality
+res <- ivw_mvmr(r_input = F.data, gencov = gencov)
+res
+# Save res
+write.csv(res, paste0("results_archive/MVMR/mvmr_",diet_trait,"_results_geneticCorrelations_harm.txt"))
+
 
 
 

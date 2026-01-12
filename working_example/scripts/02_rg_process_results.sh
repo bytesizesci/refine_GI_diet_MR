@@ -5,8 +5,8 @@
 
 # ===================== USER CONFIGURATION =====================
 # Define the directory and output file
-output_dir="/working_example/ldsc_results/rg" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_ldsc_results/all_gcor_files"  # Directory with results .log files
-output_file="/working_example/ldsc_results/processed_results" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/processed_results"
+output_dir="working_example/ldsc_results/rg" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_ldsc_results/all_gcor_files"  # Directory with results .log files
+output_file="working_example/ldsc_results/processed_results" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/processed_results"
 
 # Set the path to be removed (user should update this to match their system)
 path_to_remove="/your/full/path/to/LDSC/files/" #/pl/active/colelab/common/published_gwas/Neale_UKB_GWAS_round2/Both_sexes/LDSC/

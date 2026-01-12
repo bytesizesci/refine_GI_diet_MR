@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=ldsc_rg
-#SBATCH --output=/your/path/to/logs/ldsc_rg_%j.out      # CHANGE: set to your own logs directory
-#SBATCH --error=/your/path/to/logs/ldsc_rg_%j.err       # CHANGE: set to your own logs directory
+#SBATCH --output=config/ldsc_rg_%j.out                  
+#SBATCH --error=config/ldsc_rg_%j.err                   
 #SBATCH --partition=your_partition_name                 # CHANGE: partition name for your system
 #SBATCH --nodes=1
 #SBATCH --qos=long                                      # REMOVE or modify if your system doesn't use QoS
@@ -18,7 +18,7 @@
 # Step 1: Define paths 
 
 # Input path (update as needed)
-in_dir="/working_example/data" #/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_LDSC_input
+in_dir="working_example/data" #/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_LDSC_input
 
 # Contains ldsc file paths, one per line
 # Note, depending on where your ldsc files are saved, may have to modify the content in LDSC_filepaths to correctly reflect the location
@@ -26,10 +26,10 @@ file_list="$in_dir/LDSC_filepaths.txt" #$in_dir/PheWAS_Ttest_ALLFILES_for_gcor.t
 
 # Directory to save results
 # This is created by this script
-output_dir="/working_example/ldsc_results/rg" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_ldsc_results/all_gcor_files" 
+output_dir="working_example/ldsc_results/rg" #"/pl/active/colelab/users/kjames/refinedMR/interim_data/ldsc/PheWAS_Ttest_ldsc_results/all_gcor_files" 
 
 # Reference directory for LDSC
-ref_dir="/working_example/data/reference_1KGP3_HG19" #"/pl/active/colelab/common/eur_w_ld_chr/" 
+ref_dir="working_example/data/reference_1KGP3_HG19" #"/pl/active/colelab/common/eur_w_ld_chr/" 
 # ==============================================================
 
 # Step 2: Load LDSC
